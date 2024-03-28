@@ -9,7 +9,7 @@ export default function Home() {
           Powerfull. Fast. Reliable. The best set of tools at your fingertips. Designed for developers, by developers using beautiful and modern design.
         </span>
       </section>
-      <section className="mx-auto flex max-w-[326px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
+      <section className="mx-auto flex max-w-[600px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
         <CommandAndNavigationCommand />
       </section>
       <section>

@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { Logo } from './ui/Icons/Logo';
+import { ToolboxLogo } from './ui/Icons/ToolboxLogo';
 import { DarkmodeToggle } from './ui/darkmode-toggle';
 import { menuData } from '@/lib/navigation';
 
@@ -33,7 +33,7 @@ export default function Header() {
                         className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
                         href="/"
                       >
-                        <Logo className="h-6 w-6 " />
+                        <ToolboxLogo className="h-6 w-6 " />
                         <div className="mb-2 mt-4 text-lg font-medium">
                           shadcn/ui
                         </div>
