@@ -14,7 +14,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Logo } from './ui/Icons/Logo';
 import { DarkmodeToggle } from './ui/darkmode-toggle';
-
+import { menuData } from '@/lib/navigation';
 
 
 export default function Header() {
@@ -57,20 +57,28 @@ export default function Header() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
+
+            {
+              menuData.map((category, index) => (
+                category.displayInMenu && (<NavigationMenuItem key={index}>
+                  <NavigationMenuTrigger>{category.title}</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                      {category.items.map((subItem, subIndex) => (
+                        subItem.displayInMenu && (<ListItem key={subIndex} title={subItem.title} href={subItem.href}>
+                          {subItem.description}
+                        </ListItem>)
+                      ))}
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>)
+              ))
+            }
+
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Data Processing</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-                  <ListItem title={"Word Counter"} href={"/data-processing/word-counter"}>
-                    Count the number of words in a given text.
-                  </ListItem>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/docs" legacyBehavior passHref>
+              <Link href="/404" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Documentation
+                  404
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>

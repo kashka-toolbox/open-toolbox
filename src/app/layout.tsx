@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Header from "@/components/header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +25,9 @@ export default function RootLayout({
         enableSystem
         disableTransitionOnChange
       >
-        <body className={inter.className}>
+        <body className={cn("transition-colors", inter.className)}>
           <Header />
-          <main>
+          <main className="container pb-2 pt-2 md:pt-8 md:pb-8">
             {children}
           </main>
           <footer></footer>
