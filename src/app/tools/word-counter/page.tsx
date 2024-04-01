@@ -60,7 +60,6 @@ export default function Home() {
           </div>
         </div>
       </span>
-      {preprocessedText}
     </section>
   );
 }
