@@ -57,7 +57,7 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
         {
           title: "Word Counter",
           description: "Count the number of words in a given text.",
-          href: "/data-processing/word-counter",
+          href: "/tools/word-counter",
           displayInMenu: true,
           icon: TextIcon,
         },

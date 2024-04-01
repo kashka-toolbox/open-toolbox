@@ -30,6 +30,7 @@ export function CommandAndNavigationCommand() {
                   }}
                   key={subIndex}
                   className="hover:cursor-pointer flex flex-row items-baseline overflow-hidden text-nowrap group/cmd"
+                  keywords={["test"]}
                 >
                   {subItem.icon ? <subItem.icon className="mr-2 h-4 w-4 min-w-4 place-self-center" /> : <div className="mr-2 h-4 w-4 min-w-4" />}
                   <span className="text-nowrap inline-block">{subItem.title}</span>
