@@ -1,4 +1,8 @@
+"use client";
+
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
+import { getTitleByHref } from "@/lib/navigation";
+import { usePathname } from "next/navigation";
 
 
 export default function Layout({
@@ -6,6 +10,9 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname()
+  const pageTitle = getTitleByHref(pathname);
+
   return (
     <main className="mx-auto max-w-screen-2xl p-8 pt-6">
       <section className="pb-2">
@@ -16,11 +23,11 @@ export default function Layout({
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink href="/components">Components</BreadcrumbLink>
+              <BreadcrumbLink href="/tools">Tools</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
+              <BreadcrumbPage>{pageTitle}</BreadcrumbPage>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
