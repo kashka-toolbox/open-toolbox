@@ -51,7 +51,7 @@ export default function Header() {
                   <ListItem href="/docs/installation" title="Installation">
                     How to install dependencies and structure your app.
                   </ListItem>
-                  <ListItem href="https://github.com/Morten-Renner/mortens-toolbox" title="Source Code">
+                  <ListItem href="https://github.com/Morten-Renner/mortens-toolbox" title="Source Code" target='_blank'>
                     See the source code on GitHub.
                   </ListItem>
                 </ul>
@@ -65,9 +65,15 @@ export default function Header() {
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
                       {category.items.map((subItem, subIndex) => (
-                        subItem.displayInMenu && (<ListItem key={subIndex} title={subItem.title} href={subItem.href}>
-                          {subItem.description}
-                        </ListItem>)
+                        subItem.displayInMenu && (
+                          <ListItem
+                            key={subIndex}
+                            title={subItem.title}
+                            href={subItem.href}
+                            target={subItem.openInNewTab === true ? '_blank' : undefined}
+                          >
+                            {subItem.description}
+                          </ListItem>)
                       ))}
                     </ul>
                   </NavigationMenuContent>
