@@ -55,7 +55,7 @@ export default function Home() {
               Approximate for latex
             </label>
             <p className="text-sm text-muted-foreground">
-              The increases the accuracy of the word count of latex documents.
+              This increases the accuracy of word counting in Latex documents.
             </p>
           </div>
         </div>

@@ -51,7 +51,7 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
       ],
     },
     {
-      title: "Text Processing",
+      title: "Text",
       displayInMenu: true,
       items: [
         {
@@ -60,18 +60,6 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
           href: "/tools/word-counter",
           displayInMenu: true,
           icon: TextIcon,
-        },
-      ],
-    },
-    {
-      title: "General",
-      displayInMenu: false,
-      items: [
-        {
-          title: "404",
-          description: "Display the 404 page.",
-          href: "/404",
-          displayInMenu: false,
         },
       ],
     },

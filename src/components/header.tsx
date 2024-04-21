@@ -75,13 +75,6 @@ export default function Header() {
               ))
             }
 
-            <NavigationMenuItem>
-              <Link href="/404" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  404
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
         <div className='flex flex-1 items-center justify-between space-x-2 md:justify-end'>
