@@ -21,8 +21,18 @@ interface CommandShortcut {
   shortcut: string;
 }
 
+interface OpenInNewTab {
+  openInNewTab: boolean;
+}
+
 export const menuData: Array<Displayable & DisplayInMenuField & {
-  items: Array<DisplayInMenuField & Displayable & Partial<Navigable> & Partial<Icon> & Partial<CommandShortcut>>;
+  items: Array<
+  DisplayInMenuField
+  & Displayable
+  & Partial<Navigable>
+  & Partial<Icon>
+  & Partial<CommandShortcut>
+  & Partial<OpenInNewTab>>;
 }> = [
     {
       title: "Getting started",
@@ -47,6 +57,7 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
           href: "https://github.com/Morten-Renner/mortens-toolbox",
           displayInMenu: false,
           icon: GitHubLogoIcon,
+          openInNewTab: true,
         },
       ],
     },

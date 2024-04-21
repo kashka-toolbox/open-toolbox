@@ -26,7 +26,10 @@ export function CommandAndNavigationCommand() {
               {category.items.map((subItem, subIndex) => (
                 <CommandItem
                   onSelect={() => {
-                    if (subItem.href) router.push(subItem.href);
+                    if (subItem.href && subItem.openInNewTab != true)
+                      router.push(subItem.href);
+                    else if (subItem.href && subItem.openInNewTab === true)
+                      window.open(subItem.href, '_blank');
                   }}
                   key={subIndex}
                   className="hover:cursor-pointer flex flex-row items-baseline overflow-hidden text-nowrap group/cmd"
