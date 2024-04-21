@@ -51,8 +51,8 @@ export default function Header() {
                   <ListItem href="/docs/installation" title="Installation">
                     How to install dependencies and structure your app.
                   </ListItem>
-                  <ListItem href="/docs/primitives/typography" title="Typography">
-                    Styles for headings, paragraphs, lists...etc
+                  <ListItem href="https://github.com/Morten-Renner/mortens-toolbox" title="Source Code">
+                    See the source code on GitHub.
                   </ListItem>
                 </ul>
               </NavigationMenuContent>

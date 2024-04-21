@@ -1,4 +1,4 @@
-import { DashIcon, TextIcon } from "@radix-ui/react-icons";
+import { DashIcon, GitHubLogoIcon, TextIcon } from "@radix-ui/react-icons";
 
 interface Displayable {
   title: string;
@@ -42,11 +42,11 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
           displayInMenu: false,
         },
         {
-          title: "Typography",
-          description: "Styles for headings, paragraphs, lists...etc",
-          href: "/docs/primitives/typography",
+          title: "Source Code",
+          description: "See the source code on GitHub.",
+          href: "https://github.com/Morten-Renner/mortens-toolbox",
           displayInMenu: false,
-          shortcut: "STRG+*",
+          icon: GitHubLogoIcon,
         },
       ],
     },
