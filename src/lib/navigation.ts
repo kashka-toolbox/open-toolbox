@@ -64,3 +64,9 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
       ],
     },
   ];
+
+export function getTitleByHref (href: string): string | undefined {
+  return menuData
+    .flatMap(category => category.items)
+    .find(item => item.href === href)?.title;
+}
