@@ -1,6 +1,6 @@
 # This workflow will build a Next.js site and deploy it to GitHub Pages
 #
-name: Deploy Next.js site to Pages
+name: Deploy production to GitHub Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -56,7 +56,7 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
-        
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -65,7 +65,7 @@ jobs:
           #
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
-          
+
       - name: Build with Next.js
         run: pnpm run build
       - name: Upload artifact
