@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "playwright-ui": "pnpm exec playwright test --ui",
+    "playwright-ci": "pnpm exec playwright test"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.0.4",
@@ -28,6 +30,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.43.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
