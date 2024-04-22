@@ -44,8 +44,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Setup playwright binaries cache
+        uses: actions/cache@v3
+        id: playwright-cache
+        with:
+          path: |
+            ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ hashFiles('**/playwright.config.ts') }}-
+
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Build
         run: pnpm run build
