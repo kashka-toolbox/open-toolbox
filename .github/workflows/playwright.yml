@@ -8,11 +8,8 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow configuration (GitHub Pages)
-permissions:
-  contents: read
-  pages: read
-  id-token: write
+env:
+  CI: Test
 
 jobs:
   test:
