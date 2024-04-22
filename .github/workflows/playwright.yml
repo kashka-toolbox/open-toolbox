@@ -50,11 +50,6 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Setup Pages (production configuration)
-        uses: actions/configure-pages@v5
-        with:
-          static_site_generator: next
-
       - name: Build
         run: pnpm run build
 
