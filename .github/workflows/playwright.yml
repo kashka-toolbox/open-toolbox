@@ -55,6 +55,9 @@ jobs:
         with:
           static_site_generator: next
 
+      - name: Build
+        run: pnpm run build
+
       - name: Run Playwright tests
         run: pnpm exec playwright test
 
