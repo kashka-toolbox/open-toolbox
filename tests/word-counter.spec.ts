@@ -5,10 +5,10 @@ import { test, expect } from '@playwright/test'
  */
 test('should be able to navigate to the word counter and count some characters', async ({ page }) => {
   await page.goto('/')
-  page.getByPlaceholder('Type a command or search...').fill("Word Counter")
+  await page.getByPlaceholder('Type a command or search...').fill("Word Counter")
   await page.click('text=Word Counter')
   await expect(page).toHaveURL('/tools/word-counter')
   await expect(page.locator('span', {hasText: "Word Counter"})).toBeVisible()
-  page.getByLabel('Enter your Text here:').fill("Hello World!")
+  await page.getByLabel('Enter your Text here:').fill("Hello World!")
   await expect(page.getByText('12')).toBeInViewport()
 })
