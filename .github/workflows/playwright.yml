@@ -53,7 +53,7 @@ jobs:
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ hashFiles('**/playwright.config.ts') }}-
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
+        run: pnpm exec playwright install-deps
         if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Setup build cache
