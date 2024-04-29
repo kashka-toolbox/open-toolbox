@@ -8,6 +8,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@
 import { Skeleton } from "@/components/ui/skeleton";
 import Markdown from 'react-markdown'
 import MarkdownLink from "./MarkdownLink";
+import Message from "./Message";
 
 
 export default function Home() {
@@ -46,7 +47,7 @@ export default function Home() {
     }
   ]
 
-  const [onNewMessage, messages, error, loading, forceGetNewResponse] = useChat([
+  const [onNewMessage, messages, error, loading, forceGetNewResponse, streamingMessage] = useChat([
     {
       role: 'system',
       content: `You are a helpful assistant with access to the following functions: \n ${(JSON.stringify(functions))}\n\nTo use these functions respond with:\n<functioncall> {{ "name": "function_name", "arguments": {{ "arg_1": "value_1", "arg_1": "value_1", ... }} }} </functioncall>\n\nEdge cases you must handle:\n - If there are no functions that match the user request, you will respond politely that you cannot help. Now introduce yourself to the user.`,
@@ -63,32 +64,17 @@ export default function Home() {
 
   return (
     <section className="flex flex-col gap-4">
-      {
-        messages.map((message, index) => (
-          <div key={index} className="flex gap-4">
-            <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
-            <div className="flex flex-col gap-2">
-              <div className="flex gap-2">
-                <div className="text-sm font-bold">{message.role}</div>
-                <div className="text-sm text-gray-500">{new Date().toLocaleTimeString()}</div>
-              </div>
-              <Markdown className="text-sm" components={{ a: MarkdownLink }}>{message.content}</Markdown>
-            </div>
-          </div>
-        ))
-      }
-      {
-        loading &&
-        <div className="flex gap-4 w-full">
-          <Skeleton className="w-12 h-12 rounded-full" />
-          <div className="flex flex-col gap-2 w-full">
-            <div className="flex gap-2">
-              <Skeleton className="text-sm font-bold w-20 h-4" />
-            </div>
-            <Skeleton className="text-sm w-full h-4" />
-          </div>
-        </div>
-      }
+      <div className="flex flex-col gap-2">
+        {
+          messages.map((message, index) => (
+            <Message key={index} message={message} />
+          ))
+        }
+        {
+          streamingMessage && <Message message={streamingMessage} pending={true} />
+        }
+      </div>
+
       <form action="none" onSubmit={(e) => {
         e.preventDefault();
         if (loading) return;
