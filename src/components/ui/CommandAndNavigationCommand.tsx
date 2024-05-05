@@ -10,7 +10,7 @@ import {
   CommandShortcut,
 } from "@/components/ui/command"
 import { menuData } from "@/lib/navigation";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 
 export function CommandAndNavigationCommand() {
   const router = useRouter()
