@@ -13,7 +13,7 @@ import { cn } from '@/lib/utils';
 import { ToolboxLogo } from './ui/Icons/ToolboxLogo';
 import { DarkmodeToggle } from './ui/darkmode-toggle';
 import { menuData } from '@/lib/navigation';
-import Link from 'next/link';
+import { Link } from '@/navigation';
 
 
 export default function Header() {
