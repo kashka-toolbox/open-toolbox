@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.css";
 import Header from "@/components/header";
-import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+import dynamic from 'next/dynamic'
+const Providers = dynamic(() => import('./providers'), { ssr: false })
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,20 +22,15 @@ export default function LocaleLayout({
 }>) {
   return (
     <html lang={locale}>
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        <body className={cn("transition-colors", inter.className)}>
+      <body className={cn("transition-colors", inter.className)}>
+        <Providers>
           <Header />
           <main className="container pb-2 pt-2 md:pt-8 md:pb-8">
             {children}
           </main>
           <footer></footer>
-        </body>
-      </ThemeProvider>
+        </Providers>
+      </body>
     </html>
   );
 }
