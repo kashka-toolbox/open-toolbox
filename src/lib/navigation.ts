@@ -77,7 +77,15 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
   ];
 
 export function getTitleByHref (href: string): string | undefined {
+  href = trimLocale(href);
+  console.log(href);
+
   return menuData
     .flatMap(category => category.items)
     .find(item => item.href === href)?.title;
+}
+
+export function trimLocale (href: string): string {
+  //example: /de/tools/word-counter -->  /tools/word-counter
+  return href.replace(/\/[a-z]{2}/, '');
 }
