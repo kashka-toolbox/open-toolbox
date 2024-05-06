@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import { cn } from "@/lib/utils";
 import dynamic from 'next/dynamic'
 import { locales } from "@/navigation";
+import { unstable_setRequestLocale } from "next-intl/server";
 const Providers = dynamic(() => import('./providers'), { ssr: false })
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +27,8 @@ export default function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
+  unstable_setRequestLocale(locale);
+
   return (
     <html lang={locale}>
       <body className={cn("transition-colors", inter.className)}>
