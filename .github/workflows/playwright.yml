@@ -54,7 +54,6 @@ jobs:
 
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
 
       - name: Setup build cache
         uses: actions/cache@v4
