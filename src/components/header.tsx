@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   NavigationMenu,
@@ -14,9 +14,13 @@ import { ToolboxLogo } from './ui/Icons/ToolboxLogo';
 import { DarkmodeToggle } from './ui/darkmode-toggle';
 import { menuData } from '@/lib/navigation';
 import { Link } from '@/navigation';
+import { Button } from './ui/button';
+import { AuthContext } from './auth-provider';
 
 
 export default function Header() {
+  const { isSignedIn, signIn } = useContext(AuthContext) ?? {};
+
   return (
     <header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='container flex h-14 max-w-screen-2xl items-center'>
@@ -84,6 +88,10 @@ export default function Header() {
         </NavigationMenu>
         <div className='flex flex-1 items-center justify-between space-x-2 md:justify-end'>
           <DarkmodeToggle />
+
+          {
+            isSignedIn ? <div>Avatar</div> : <Button onClick={() => signIn!("a", "b")}>Login</Button>
+          }
         </div>
       </div>
     </header>

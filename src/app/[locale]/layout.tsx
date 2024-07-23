@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import dynamic from 'next/dynamic'
 import { locales } from "@/navigation";
 import { unstable_setRequestLocale } from "next-intl/server";
-const Providers = dynamic(() => import('./providers'), { ssr: false })
+const Providers = dynamic(() => import('@/components/providers'), { ssr: false })
 
 const inter = Inter({ subsets: ["latin"] });
 
