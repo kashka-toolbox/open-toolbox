@@ -16,11 +16,16 @@ import { menuData } from '@/lib/navigation';
 import { Link } from '@/navigation';
 import { Button } from './ui/button';
 import { AuthContext } from './auth-provider';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
+import { useRouter } from 'next/navigation';
+import LoginForm from './auth/login.form';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { DialogClose } from '@radix-ui/react-dialog';
 
 
 export default function Header() {
-  const { isSignedIn, signIn } = useContext(AuthContext) ?? {};
-
+  const { isSignedIn, logout } = useContext(AuthContext) ?? {};
   return (
     <header className='sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
       <div className='container flex h-14 max-w-screen-2xl items-center'>
@@ -90,7 +95,32 @@ export default function Header() {
           <DarkmodeToggle />
 
           {
-            isSignedIn ? <div>Avatar</div> : <Button onClick={() => signIn!("a", "b")}>Login</Button>
+            isSignedIn ?
+              <div>
+                <Button onClick={() => logout!()}>Logout</Button>
+              </div>
+              : <Dialog>
+                  <DialogTrigger asChild>
+                    <Button>Login</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <div className='h-1' />
+                    <DialogHeader>
+                      <Tabs defaultValue="login">
+                        <TabsList className="grid w-full grid-cols-2">
+                          <TabsTrigger value="login">Login</TabsTrigger>
+                          <TabsTrigger value="register">Register</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="login">
+                          <LoginForm />
+                        </TabsContent>
+                        <TabsContent value="register">
+                          TODO: Register
+                        </TabsContent>
+                      </Tabs>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
           }
         </div>
       </div>

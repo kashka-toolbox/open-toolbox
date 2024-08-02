@@ -1,6 +1,7 @@
 'use client';
 
-import { createContext, useEffect, useState } from "react";
+import api from "@/lib/axios/axios";
+import { createContext, useContext, useEffect, useState } from "react";
 
 // Export the Context (refresh and access token)
 export const AuthContext = createContext<{
@@ -10,7 +11,7 @@ export const AuthContext = createContext<{
   setAccessToken: React.Dispatch<React.SetStateAction<string>>,
   isSignedIn: boolean,
   logout: () => boolean,
-  signIn: (username: string, password: string) => void, // TODO return error or boolean or something like that?
+  signIn: (username: string, password: string) => Promise<string | boolean>,
 } | undefined>(undefined);
 
 
@@ -32,15 +33,26 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
 
   const logout = () => {
-    // TODO implement logout
-    throw new Error('Not implemented');
+    setRefreshToken('');
+    setAccessToken('');
+    // TODO implement logout / notify server
+    return true;
   }
 
-  const signIn = (username: string, password: string) => {
-    setRefreshToken('refreshToken');
-    setAccessToken('accessToken');
-    // TODO implement signIn
-    //throw new Error('Not implemented');
+  const signIn = async (username: string, password: string) => {
+    return await api.post('/auth/login', { email: username, password }).then((response) => {
+      if(typeof response.data.refresh_token === 'string') {
+        setAccessToken('');
+        setRefreshToken(response.data.refresh_token);
+        return true;
+      } else {
+        console.error('Invalid response for login', response.data);
+        return "BAD_RESPONSE";
+      }
+    }).catch((error) => {
+      console.error(error);
+      return error.response.statusText as string;
+    });
   }
 
   useEffect(() => {
@@ -52,7 +64,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
   }, [accessToken]);
 
   useEffect(() => {
-    setIsSignedIn(accessToken.length > 0 && refreshToken.length > 0);
+    setIsSignedIn(refreshToken?.length > 0);
   }, [accessToken, refreshToken]);
 
   return (
