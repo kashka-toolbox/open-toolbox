@@ -37,7 +37,7 @@ export default function Home() {
         {metrics.map((metric, index) => (
           [
             <Metric key={metric.label} label={metric.label} value={preprocessedText.match(metric.regex)?.length ?? 0} />,
-            (index != metrics.length - 1) ? <Separator key={metric.label} orientation="vertical" /> : null
+            (index != metrics.length - 1) ? <Separator key={metric.label + "_seperator"} orientation="vertical" /> : null
           ]
         ))}
       </span>
