@@ -51,7 +51,7 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
       }
     }).catch((error) => {
       console.error(error);
-      return error.response.statusText as string;
+      return error?.response?.statusText as string ?? "UNKNOWN_ERROR";
     });
   }
 
