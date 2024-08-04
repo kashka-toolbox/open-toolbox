@@ -1,4 +1,4 @@
-import { DashIcon, GitHubLogoIcon, TextIcon } from "@radix-ui/react-icons";
+import { ExclamationTriangleIcon, GitHubLogoIcon, TextIcon } from "@radix-ui/react-icons";
 
 interface Displayable {
   title: string;
@@ -59,6 +59,26 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
           icon: GitHubLogoIcon,
           openInNewTab: true,
         },
+      ],
+    },
+    {
+      title: "Debug",
+      displayInMenu: process.env.NEXT_PUBLIC_DISPLAY_DEBUG === "true",
+      items: [
+        {
+          title: "Debug",
+          description: "Debugging tools.",
+          href: "/debug",
+          displayInMenu: false,
+          icon: ExclamationTriangleIcon,
+        },
+        {
+          title: "Auth",
+          description: "Debugging Authentication tools.",
+          href: "/debug/auth",
+          displayInMenu: process.env.NEXT_PUBLIC_DISPLAY_DEBUG === "true",
+          icon: ExclamationTriangleIcon,
+        }
       ],
     },
     {
