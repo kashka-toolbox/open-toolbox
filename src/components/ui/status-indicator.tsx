@@ -43,7 +43,7 @@ const StatusIndicator = React.forwardRef<
       : status === "checked" ?
         <CheckIcon className="h-4 w-4 " />
       : status === "progress" ?
-        <span className="w-4 h-4 rounded-full border-b-2 border-b-primary animate-spin" /> : null
+        <span className="w-3 h-3 rounded-full border-b-2 border-b-primary animate-spin" /> : null
     }
     </span>
     
