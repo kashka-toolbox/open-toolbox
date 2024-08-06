@@ -8,22 +8,20 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { cn } from '@/lib/utils';
-import { ToolboxLogo } from './ui/Icons/ToolboxLogo';
-import { DarkmodeToggle } from './ui/darkmode-toggle';
+} from "@/components/ui/navigation-menu";
 import { menuData } from '@/lib/navigation';
+import { cn } from '@/lib/utils';
 import { Link } from '@/navigation';
-import { Button } from './ui/button';
 import { AuthContext } from './auth-provider';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './ui/dropdown-menu';
-import { useRouter } from 'next/navigation';
 import LoginForm from './auth/login.form';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from './ui/dialog';
+import { ToolboxLogo } from './ui/Icons/ToolboxLogo';
+import { Button } from './ui/button';
+import { DarkmodeToggle } from './ui/darkmode-toggle';
+import { Dialog, DialogContent, DialogHeader, DialogTrigger } from './ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
-import { DialogClose } from '@radix-ui/react-dialog';
 
 
+// TODO: add mobile layout
 export default function Header() {
   const { isSignedIn, logout } = useContext(AuthContext) ?? {};
   return (
