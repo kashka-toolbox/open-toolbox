@@ -36,7 +36,7 @@ const StatusIndicator = React.forwardRef<
     className={cn(alertVariants({ variant }), "flex items-center space-x-2", className)}
     {...props}
   >
-    <span className={`w-4 h-4 rounded-full border text-primary-foreground transition-all duration-200 flex items-center justify-center ${status == "checked" ? "bg-white border-white" : "border-border bg-primary-foreground"}`}>
+    <span className={`w-4 h-4 rounded-full border text-primary-foreground transition-all duration-200 flex items-center justify-center ${status == "checked" ? "bg-primary border-primary" : "border-border bg-primary-foreground"}`}>
     {
       status === "unchecked" ?
         null
