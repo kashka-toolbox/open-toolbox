@@ -1,6 +1,8 @@
 "use client"
 
 import { AuthContext } from "@/components/auth-provider";
+import WithAuthOnly from "@/components/auth/WithAuthOnly";
+import { Card } from "@/components/ui/card";
 import { StatusIndicator } from "@/components/ui/status-indicator";
 import { useContext } from "react";
 
@@ -17,6 +19,17 @@ export default function Home() {
           <StatusIndicator status={(localStorage.getItem("accessToken")?.length ?? 0) > 0 ? "checked" : "unchecked"}>
             has access token
           </StatusIndicator>
+
+          <br />
+          <h2>Visibility</h2>
+          This should be red if not signed in:
+          <Card className="h-12 w-12 flex items-center justify-center">
+            <WithAuthOnly alternative={
+              <span>Not signed in</span>
+            }>
+              <span>Signed in</span>
+            </WithAuthOnly>
+          </Card>
       </span>
     </section>
   );
