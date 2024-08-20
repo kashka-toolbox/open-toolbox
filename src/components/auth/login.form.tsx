@@ -40,7 +40,14 @@ export default function LoginForm() {
 
         if (result === "Unauthorized") {
           error = "Invalid username or password";
+        } else if (result === "ERR_NETWORK") {
+          error = "Network error. Please try again later.";
         }
+
+        form.setError("username", {
+          type: "manual",
+          message: "",
+        });
 
         form.setError("password", {
           type: "manual",
