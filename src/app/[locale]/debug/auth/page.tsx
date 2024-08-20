@@ -22,8 +22,7 @@ export default function Home() {
 
           <br />
           <h2>Visibility</h2>
-          This should be red if not signed in:
-          <Card className="h-12 w-12 flex items-center justify-center">
+          <Card className="p-4 w-max">
             <WithAuthOnly alternative={
               <span>Not signed in</span>
             }>
