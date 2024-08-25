@@ -21,7 +21,6 @@ function testAuth(): Promise<string> {
     console.error('Invalid response for check', response);
     return "200 OK but invalid response format";
   }).catch((error) => {
-    console.error(error);
     return (error.message as string) ?? "Unknown -> See console";
   });
 }
@@ -61,7 +60,7 @@ export default function Page() {
               setTestResponse(null);
               testAuth().then((response) => {
                 setTestResponse(response);
-              })
+              });
             }
           }
           variant={"default"}>Test Auth</Button>

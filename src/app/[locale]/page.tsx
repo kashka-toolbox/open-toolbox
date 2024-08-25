@@ -1,4 +1,3 @@
-import LoginForm from "@/components/auth/login.form";
 import { CommandAndNavigationCommand } from "@/components/ui/CommandAndNavigationCommand";
 import { useTranslations } from 'next-intl';
 import { unstable_setRequestLocale } from "next-intl/server";
