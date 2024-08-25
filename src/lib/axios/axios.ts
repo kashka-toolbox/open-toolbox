@@ -6,11 +6,12 @@ const backend = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
-/*
-// Add a request interceptor
-api.interceptors.request.use(
+
+
+// interceptor to attach the token to the request
+backend.interceptors.request.use(
   config => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
     if (token) {
       config.headers['Authorization'] = `Bearer ${token}`;
     }
@@ -20,7 +21,7 @@ api.interceptors.request.use(
     // Do something with request error
     return Promise.reject(error);
   }
-);*/
+);
 
 // Add a response interceptor
 /*api.interceptors.response.use(
