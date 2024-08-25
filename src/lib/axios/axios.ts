@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 
-const api = axios.create({
+const backend = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_BASE_URL,
   headers: { 'Content-Type': 'application/json' },
 });
@@ -34,4 +34,4 @@ api.interceptors.request.use(
   }
 );*/
 
-export default api;
+export default backend;
