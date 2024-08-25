@@ -46,9 +46,7 @@ export default function Layout({
             </BreadcrumbList>
         </Breadcrumb>
       </section>
-      <section className="border rounded-md border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-2 md:p-4">
-        {children}
-      </section>
+      {children}
     </main>
   );
 }
