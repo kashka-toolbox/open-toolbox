@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useEffect, useState } from "react";
 import { approximateLatexTextOutput } from "@/lib/text/approximateLatexTextOutput"
 import { Metric } from "./Metric";
+import { Section } from "@/components/ui/Section";
 
 const metrics = [
   { label: "characters", regex: /./g },
@@ -24,7 +25,7 @@ export default function Home() {
   }, [text, latex])
 
   return (
-    <section className="flex flex-col gap-4">
+    <Section className="flex flex-col gap-4">
       <span className="flex flex-col gap-1">
         <Label htmlFor="wordcounter" className="font-semibold tracking-tight text-2xl">Enter your Text here:</Label>
         <Textarea
@@ -60,7 +61,7 @@ export default function Home() {
           </div>
         </div>
       </span>
-    </section>
+    </Section>
   );
 }
 
