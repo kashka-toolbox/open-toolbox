@@ -2,6 +2,7 @@ import type { Config } from "tailwindcss"
 import { PluginCreator, PluginsConfig } from "tailwindcss/types/config"
 import { PluginAPI } from 'tailwindcss/types/config';
 import plugin from 'tailwindcss/plugin';
+import { WidthIcon } from "@radix-ui/react-icons";
 
 const config = {
   darkMode: ["class"],
@@ -101,6 +102,19 @@ const config = {
         },
         {
           values: theme('width'),
+        }
+      );
+    }),
+    plugin(function ({ matchUtilities, theme }: PluginAPI) {
+      matchUtilities(
+        {
+          'outline-border': (value) => ({
+            'outline': `1px solid ${value}`,
+          }),
+        },
+        {
+          values: theme('colors'),
+          type: 'color',
         }
       );
     })

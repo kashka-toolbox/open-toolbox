@@ -15,7 +15,7 @@ export default function Layout({
 
   return (
     <main className="mx-auto max-w-screen-2xl p-8 pt-6">
-      <section className="pb-2">
+      <section className="pb-2 pl-2">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>

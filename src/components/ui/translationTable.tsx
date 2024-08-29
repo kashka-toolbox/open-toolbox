@@ -12,7 +12,7 @@ const TranslationTable = React.forwardRef<HTMLDivElement, TranslationTableProps>
       <div
         ref={ref}
         className={cn(
-          "grid auto-fill-24 auto-rows-max gap-0 w-full",
+          "grid auto-fill-24 auto-rows-max gap-[1px] w-full",
           className
         )}
         {...props}
@@ -34,7 +34,7 @@ const TranslationTableItem = React.forwardRef<HTMLDivElement, TranslationTableIt
       <div
         ref={ref}
         className={cn(
-          "flex flex-col justify-around px-4 py-2 border border-border gap-2 aspect-square",
+          "flex flex-col justify-around px-4 py-2 outline-border-border/100 gap-2 aspect-square",
           className
         )}
         {...props}

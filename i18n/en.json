@@ -1,5 +1,26 @@
 {
   "home": {
     "title": "The Ultimate Toolbox"
+  },
+  "tools": {
+    "encoding": {
+      "url": {
+        "encoded": "Encoded",
+        "decoded": "Decoded",
+        "title": "URL Encoding",
+        "description": "URL Encoding (also known as Percent-Encoding) is a method of encoding characters in URLs that are not part of the standard ASCII character set. This includes special characters such as spaces, arrows or special characters from other languages.",
+        "howItWorks": {
+          "title": "How it works",
+          "description": "<li>Each special character is encoded by a \"%\" followed by a 2-digit hexadecimal number.</li>\n<li>For example, a space character would be encoded as \"%20\" and the less-than symbol \"<\" would be encoded as \"%3C\".</li>"
+        },
+        "lookup": {
+          "title": "Lookup",
+          "description": "Lookup the URL encoding for a specific character."
+        }
+      }
+    }
+  },
+  "translationTable": {
+    "search": "Search"
   }
 }

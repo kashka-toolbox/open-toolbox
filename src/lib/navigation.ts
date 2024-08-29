@@ -88,12 +88,25 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
         {
           title: "Word Counter",
           description: "Count the number of words in a given text.",
-          href: "/tools/word-counter",
+          href: "/word-counter",
           displayInMenu: true,
           icon: TextIcon,
         },
       ],
     },
+    {
+      title: "Encoding",
+      displayInMenu: true,
+      description: "Encode and decode different types of data.",
+      items: [
+        {
+          title: "URL",
+          description: "En/Decode URLs.",
+          href: "/encoding/url",
+          displayInMenu: true,
+        },
+      ],
+    }
   ];
 
 export function getTitleByHref (href: string): string | undefined {
