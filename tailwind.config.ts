@@ -1,4 +1,7 @@
 import type { Config } from "tailwindcss"
+import { PluginCreator, PluginsConfig } from "tailwindcss/types/config"
+import { PluginAPI } from 'tailwindcss/types/config';
+import plugin from 'tailwindcss/plugin';
 
 const config = {
   darkMode: ["class"],
@@ -7,7 +10,7 @@ const config = {
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
-	],
+  ],
   prefix: "",
   theme: {
     container: {
@@ -23,9 +26,9 @@ const config = {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
-      'hsm': {'raw': '(min-height: 500px)'},
-      'hmd': {'raw': '(min-height: 700px)'},
-      'hlg': {'raw': '(min-height: 900px)'},
+      'hsm': { 'raw': '(min-height: 500px)' },
+      'hmd': { 'raw': '(min-height: 700px)' },
+      'hlg': { 'raw': '(min-height: 900px)' },
     },
     extend: {
       colors: {
@@ -84,7 +87,24 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    plugin(function ({ matchUtilities, theme }: PluginAPI) {
+      matchUtilities(
+        {
+          'auto-fill': (value) => ({
+            gridTemplateColumns: `repeat(auto-fill, minmax(min(${value}, 100%), 1fr))`,
+          }),
+          'auto-fit': (value) => ({
+            gridTemplateColumns: `repeat(auto-fit, minmax(min(${value}, 100%), 1fr))`,
+          })
+        },
+        {
+          values: theme('width'),
+        }
+      );
+    })
+  ],
 } satisfies Config
 
 export default config
