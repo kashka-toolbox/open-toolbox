@@ -30,6 +30,7 @@ const CopyToClipboard = React.forwardRef<HTMLButtonElement, CopyToClipboardBtnPr
         className={cn("h-6 w-6", className)}
         onMouseLeave={() => setShowSuccess(false)}
         onPointerLeave={() => setShowSuccess(false)}
+        aria-roledescription="button to copy text to clipboard"
         ref={ref}
         {...props}>
         <CheckIcon className={`absolute h-4 w-4 opacity-${showSuccess ? 1 : 0} transition-opacity`} />
