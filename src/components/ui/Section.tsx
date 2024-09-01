@@ -5,12 +5,12 @@ import { cva, VariantProps } from "class-variance-authority"
 
 
 const sectionVariants = cva(
-  "border rounded-md border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 p-2 md:p-4",
+  "border border-border rounded-md p-2 md:p-4",
   {
     variants: {
       variant: {
         default: "",
-        hoverFading: "text-primary/80 hover:text-primary transition-colors duration-200",
+        ghost: "bg-transparent border-transparent",
         primary: "",
       },
     },

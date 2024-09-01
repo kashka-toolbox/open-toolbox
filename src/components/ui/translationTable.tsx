@@ -34,7 +34,7 @@ const TranslationTableItem = React.forwardRef<HTMLDivElement, TranslationTableIt
       <div
         ref={ref}
         className={cn(
-          "flex flex-col justify-around px-4 py-2 outline-border-border/100 gap-2 aspect-square",
+          "flex flex-col justify-around px-4 py-2 outline-border-border gap-2 aspect-square",
           className
         )}
         {...props}
