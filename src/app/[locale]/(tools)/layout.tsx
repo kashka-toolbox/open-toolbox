@@ -14,7 +14,7 @@ export default function Layout({
   const pageTitle = getTitleByHref(pathname);
 
   return (
-    <main className="mx-auto max-w-screen-2xl p-8 pt-6">
+    <main className="mx-auto max-w-screen-2xl pt-6">
       <section className="pb-2 pl-2">
         <Breadcrumb>
           <BreadcrumbList>
