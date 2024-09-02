@@ -1,9 +1,11 @@
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CommandAndNavigationCommand } from "@/components/ui/CommandAndNavigationCommand";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Section } from "@/components/ui/Section";
+import { ExclamationTriangleIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import { useTranslations } from 'next-intl';
 
 export default function Home() {
@@ -81,6 +83,24 @@ export default function Home() {
             <Button>Deploy</Button>
           </CardFooter>
         </Card>
+      </Section>
+      <Section variant={"ghost"}>
+        <Alert variant={"default"}>
+          <InfoCircledIcon />
+          <AlertTitle>Alert Title</AlertTitle>
+          <AlertDescription>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+          </AlertDescription>
+        </Alert>
+      </Section>
+      <Section variant={"ghost"}>
+        <Alert variant={"destructive"}>
+          <ExclamationTriangleIcon />
+          <AlertTitle>Alert Title</AlertTitle>
+          <AlertDescription>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
+          </AlertDescription>
+        </Alert>
       </Section>
     </>
   );
