@@ -62,6 +62,10 @@ const config = {
           DEFAULT: "hsl(var(--popover), <alpha-value>)",
           foreground: "var(--popover-foreground), <alpha-value>)",
         },
+        code: {
+          DEFAULT: "hsl(var(--code), <alpha-value>)",
+          foreground: "var(--code-foreground), <alpha-value>)",
+        },
         card: {
           DEFAULT: "hsl(var(--card), <alpha-value>)",
           foreground: "var(--card-foreground), <alpha-value>)",

@@ -10,6 +10,8 @@
     --card-foreground: 0, 0%, 0%;
     --popover: 0, 0%, 93%;
     --popover-foreground: 0, 0%, 100%;
+    --code: 44, 5%, 100%;
+    --code-foreground: 44, 5%, 0%;
     --primary: 44, 85%, 66%;
     --primary-foreground: 44, 15%, 14%;
     --secondary: 44, 85%, 86%;
@@ -37,12 +39,14 @@
     --card-foreground: 0, 0%, 100%;
     --popover: 0, 0%, 7%;
     --popover-foreground: 0, 0%, 100%;
+    --code: 44, 5%, 10%;
+    --code-foreground: 44, 5%, 100%;
     --primary: 44, 85%, 66%;
     --primary-foreground: 44, 15%, 14%;
     --secondary: 44, 15%, 14%;
     --secondary-foreground: 44, 85%, 66%;
-    --muted: 0, 0%, 10%;
-    --muted-foreground: 0, 0%, 85%;
+    --muted: 44, 0%, 10%;
+    --muted-foreground: 44, 0%, 80%;
     --accent: 0, 0%, 55%;
     --accent-foreground: 0, 0%, 100%;
     --destructive: 0, 79%, 11%;
@@ -74,6 +78,10 @@
 
 
 @layer components {
+  code {
+    @apply bg-code text-code-foreground font-mono p-1 rounded border border-border;
+  }
+
   .header-section-1 {
     @apply text-4xl font-black tracking-tight scroll-m-20;
   }
