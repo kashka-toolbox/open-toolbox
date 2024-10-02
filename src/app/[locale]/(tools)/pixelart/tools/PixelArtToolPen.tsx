@@ -9,7 +9,7 @@ export class PixelArtToolPen extends CanvasTool {
         throw new Error("Method not implemented.");
     }
     
-    onMouseMove(artworkX: number, artworkY: number, mouseEvent: MouseEvent): void {
+    onMouseMove(artworkX: number, artworkY: number, mouseEvent: MouseEvent, leftMouseDown: boolean): void {
         if (!this.prewviewContext || !this.previewCanvas || !this.previewToArtwork || !this.resetPreviewToArtwork) {
             console.log("Tool not selected", {
                 prewviewContext: this.prewviewContext,
@@ -24,5 +24,9 @@ export class PixelArtToolPen extends CanvasTool {
         
         this.prewviewContext.fillStyle = "black";
         this.prewviewContext.fillRect(artworkX, artworkY, 1, 1);
+
+        if (leftMouseDown) {
+            this.previewToArtwork();
+        }
     }
 }

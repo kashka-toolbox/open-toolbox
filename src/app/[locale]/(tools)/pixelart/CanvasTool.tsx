@@ -22,5 +22,5 @@ export abstract class CanvasTool {
     }
 
     abstract onArtworkClick(x: number, y: number, mouseEvent: MouseEvent): void;
-    abstract onMouseMove(artworkX: number, artworkY: number, mouseEvent: MouseEvent): void;
+    abstract onMouseMove(artworkX: number, artworkY: number, mouseEvent: MouseEvent, leftMouseDown: boolean): void;
 }

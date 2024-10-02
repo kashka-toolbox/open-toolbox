@@ -82,6 +82,22 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         const previewCanvas = new OffscreenCanvas(artworkCanvas!.width, artworkCanvas!.height);
         setArtworkPreviewCanvas(previewCanvas);
 
+        const previewToArtwork = () => { // TODO: the preview stopped working after this
+            if (!previewCanvas)
+                throw new Error("No preview canvas to copy from");
+    
+            const previewContext = previewCanvas.getContext("2d");
+            if (!previewContext)
+                throw new Error("Could not get context of preview canvas");
+            const artworkContext = artworkCanvas!.getContext("2d");
+            if (!artworkContext)
+                throw new Error("Could not get context of artwork canvas");
+    
+            artworkContext.drawImage(previewCanvas, 0, 0);
+    
+            setArtworkPreviewCanvas(null);
+        }
+
         // copy artwork to preview
         const previewContext = previewCanvas.getContext("2d");
         if (!previewContext)
@@ -99,21 +115,6 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         // select tool and pass preview canvas
         selectedTool.onSelect(artworkCanvas!, previewContext!, previewToArtwork, resetPreviewToArtwork);
     }, [selectedTool]);
-
-    const previewToArtwork = () => {
-        if (!artworkPreviewCanvas)
-            return;
-        const previewContext = getArtworkPreviewAContext();
-        if (!previewContext)
-            throw new Error("Could not get context of preview canvas");
-        const artworkContext = getArtworkContext();
-        if (!artworkContext)
-            throw new Error("Could not get context of artwork canvas");
-
-        artworkContext.drawImage(artworkPreviewCanvas, 0, 0);
-
-        setArtworkPreviewCanvas(null);
-    }
 
 
 
@@ -153,20 +154,20 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
     }, [canvasRef.current?.width, canvasRef.current?.height]);
 
     const onMouseDown = (e: MouseEvent) => {
-        if (e.button === 1) {
+        if (e.button === 1) { // middle mouse button
             setMiddleMouseDown(true);
         }
 
-        if (e.button === 0) {
+        if (e.button === 0) { // left mouse button
             setMouseDown(true);
         }
     }
     const onMouseUp = (e: MouseEvent) => {
-        if (e.button === 1) {
+        if (e.button === 1) { // middle mouse button
             setMiddleMouseDown(false);
         }
 
-        if (e.button === 0) {
+        if (e.button === 0) { // left mouse button
             setMouseDown(false);
         }
     }
@@ -188,7 +189,7 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         const positionOnArtworkX = Math.floor(artworkCanvas.width * (e.offsetX - panX) / (artworkCanvas.width * zoom * zoomBasis));
         const positionOnArtworkY = Math.floor(artworkCanvas.height * (e.offsetY - panY) / (artworkCanvas.height * zoom * zoomBasis));
 
-        selectedTool.onMouseMove(positionOnArtworkX, positionOnArtworkY, e);
+        selectedTool.onMouseMove(positionOnArtworkX, positionOnArtworkY, e, mouseDown);
     };
 
     const onScroll = (e: WheelEvent) => {
