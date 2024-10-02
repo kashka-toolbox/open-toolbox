@@ -180,25 +180,13 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         if (!selectedTool || !canvas || !artworkCanvas)
             return;
 
-        // context.strokeRect(panX, panY, artworkWidth * zoomBasis * zoom, artworkHeight * zoomBasis * zoom);
         // propagate mouse move to tool
-
         const canvasHeight = canvas.height;
         const artworkHeight = artworkCanvas.height;
         const zoomBasis = canvasHeight / artworkHeight;
         
         const positionOnArtworkX = Math.floor(artworkCanvas.width * (e.offsetX - panX) / (artworkCanvas.width * zoom * zoomBasis));
         const positionOnArtworkY = Math.floor(artworkCanvas.height * (e.offsetY - panY) / (artworkCanvas.height * zoom * zoomBasis));
-
-        console.log({
-            offsetX: e.offsetX,
-            offsetY: e.offsetY,
-            positionOnArtworkX,
-            positionOnArtworkY,
-            panX,
-            panY,
-            zoomBasis,
-        });
 
         selectedTool.onMouseMove(positionOnArtworkX, positionOnArtworkY, e);
     };
