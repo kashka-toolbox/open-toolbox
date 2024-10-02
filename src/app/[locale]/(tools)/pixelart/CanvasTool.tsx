@@ -2,16 +2,21 @@
 export abstract class CanvasTool {
     public name: string;
 
-    private previewCanvas?: OffscreenCanvas;
-    private previewToArtwork?: Function;
+    protected previewCanvas?: OffscreenCanvas;
+    protected prewviewContext?: OffscreenCanvasRenderingContext2D;
+    protected previewToArtwork?: Function;
+    protected resetPreviewToArtwork?: Function;
+    //protected requestRender?: Function;
 
     constructor(name: string) {
         this.name = name;
     }
 
-    onSelect(previewCanvas: OffscreenCanvas, previewToArtwork: Function): void {
+    onSelect(previewCanvas: OffscreenCanvas, previewContext: OffscreenCanvasRenderingContext2D, previewToArtwork: Function, resetPreviewToArtwork: Function): void {
         this.previewCanvas = previewCanvas;
+        this.prewviewContext = previewContext;
         this.previewToArtwork = previewToArtwork;
+        this.resetPreviewToArtwork = resetPreviewToArtwork
 
         console.log("Tool selected: " + this.name);
     }

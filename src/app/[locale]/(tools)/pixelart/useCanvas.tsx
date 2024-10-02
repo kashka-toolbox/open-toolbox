@@ -1,11 +1,12 @@
 'use client';
-import { RefObject, use, useEffect, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 import { PixelArtToolPen } from "./tools/PixelArtToolPen";
 import { CanvasTool } from "./CanvasTool";
-import { set } from "react-hook-form";
 
 interface CanvasOptions {
     zoomScrollFactor?: number;
+
+    pauseRenderOnFocusLoss?: boolean;
 }
 
 const getPixel = (imageData: ImageData, x: number, y: number) => {
@@ -37,6 +38,9 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
     const [panY, setPanY] = useState(0);
 
     const [mouseDown, setMouseDown] = useState(false);
+    const [middleMouseDown, setMiddleMouseDown] = useState(false);
+
+    const frameRequestRef = useRef<number>(-1);
 
     const tools = {
         pen: new PixelArtToolPen()
@@ -44,15 +48,33 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
 
     const [selectedTool, setSelectedTool] = useState<CanvasTool | null>(null);
 
-    const selectTool = (name: keyof typeof tools) => {
+    const selectTool = (name: keyof typeof tools | "none") => {
         setSelectedTool((oldTool) => {
+            if (name === "none") {
+                return null;
+            }
+
             return tools[name];
         });
     }
 
+    const getArtworkContext = () => {
+        return artworkCanvas?.getContext("2d");
+    }
+
+    const getArtworkPreviewAContext = () => {
+        return artworkPreviewCanvas?.getContext("2d");
+    }
+
+
     useEffect(() => {
         console.log("selected tool changed");
-        
+
+        if (selectTool === null) {
+            setArtworkPreviewCanvas(null);
+            return;
+        }
+
         if (!artworkCanvas || !selectedTool)
             return;
 
@@ -67,23 +89,24 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         const artworkContext = artworkCanvas!.getContext("2d");
         if (!artworkContext)
             throw new Error("Could not get context of artwork canvas");
-        previewContext.drawImage(previewCanvas!, 0, 0);
+
+        const resetPreviewToArtwork = () => {
+            previewContext.drawImage(artworkCanvas!, 0, 0);
+        }
+
+        resetPreviewToArtwork();
 
         // select tool and pass preview canvas
-        selectedTool.onSelect(artworkCanvas!, previewToArtwork);
-
-        return () => {
-            setArtworkPreviewCanvas(null);
-        }
+        selectedTool.onSelect(artworkCanvas!, previewContext!, previewToArtwork, resetPreviewToArtwork);
     }, [selectedTool]);
 
     const previewToArtwork = () => {
         if (!artworkPreviewCanvas)
             return;
-        const previewContext = artworkPreviewCanvas.getContext("2d");
+        const previewContext = getArtworkPreviewAContext();
         if (!previewContext)
             throw new Error("Could not get context of preview canvas");
-        const artworkContext = artworkCanvas?.getContext("2d");
+        const artworkContext = getArtworkContext();
         if (!artworkContext)
             throw new Error("Could not get context of artwork canvas");
 
@@ -92,9 +115,7 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         setArtworkPreviewCanvas(null);
     }
 
-    const getArtworkContext = () => {
-        return artworkCanvas?.getContext("2d");
-    }
+
 
     const newArtwork = (width = 16, height = 16) => {
         const newArtworkCanvas = new OffscreenCanvas(width, height);
@@ -131,25 +152,55 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         return () => resizeObserver.disconnect();
     }, [canvasRef.current?.width, canvasRef.current?.height]);
 
-    const onMouseDown = () => setMouseDown(true);
-    const onMouseUp = () => setMouseDown(false);
+    const onMouseDown = (e: MouseEvent) => {
+        if (e.button === 1) {
+            setMiddleMouseDown(true);
+        }
+
+        if (e.button === 0) {
+            setMouseDown(true);
+        }
+    }
+    const onMouseUp = (e: MouseEvent) => {
+        if (e.button === 1) {
+            setMiddleMouseDown(false);
+        }
+
+        if (e.button === 0) {
+            setMouseDown(false);
+        }
+    }
 
     const onMouseMove = (e: MouseEvent) => {
-        if (mouseDown) {
+        if (middleMouseDown) {
             setPanX((oldPanX) => oldPanX + e.movementX);
             setPanY((oldPanY) => oldPanY + e.movementY);
         }
 
-        if (!selectedTool)
+        if (!selectedTool || !canvas || !artworkCanvas)
             return;
 
+        // context.strokeRect(panX, panY, artworkWidth * zoomBasis * zoom, artworkHeight * zoomBasis * zoom);
         // propagate mouse move to tool
-        const positionOnArtworkX = Math.floor((e.offsetX - panX) / (zoom * canvas!.width / artworkCanvas!.width));
-        const positionOnArtworkY = Math.floor((e.offsetY - panY) / (zoom * canvas!.height / artworkCanvas!.height));
+
+        const canvasHeight = canvas.height;
+        const artworkHeight = artworkCanvas.height;
+        const zoomBasis = canvasHeight / artworkHeight;
+        
+        const positionOnArtworkX = Math.floor(artworkCanvas.width * (e.offsetX - panX) / (artworkCanvas.width * zoom * zoomBasis));
+        const positionOnArtworkY = Math.floor(artworkCanvas.height * (e.offsetY - panY) / (artworkCanvas.height * zoom * zoomBasis));
+
+        console.log({
+            offsetX: e.offsetX,
+            offsetY: e.offsetY,
+            positionOnArtworkX,
+            positionOnArtworkY,
+            panX,
+            panY,
+            zoomBasis,
+        });
 
         selectedTool.onMouseMove(positionOnArtworkX, positionOnArtworkY, e);
-
-
     };
 
     const onScroll = (e: WheelEvent) => {
@@ -171,7 +222,7 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         canvasRef.current.addEventListener("mousedown", onMouseDown);
         canvasRef.current.addEventListener("mouseleave", onMouseUp);
         canvasRef.current.addEventListener("mouseup", onMouseUp);
-        
+
         return () => { // unsubscribe events
             if (!canvasRef.current)
                 return;
@@ -192,19 +243,46 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
                 return;
             canvasRef.current.removeEventListener("mousemove", onMouseMove);
         }
-    }, [canvasRef.current, mouseDown]);
+    }, [canvasRef.current, mouseDown, middleMouseDown, zoom, panX, panY]);
 
 
-
+    /**
+     * Renders the canvas every change.
+     */
     useEffect(() => {
-        renderCanvas();
-    }, [zoom, panX, panY, mouseDown]);
+        frameRequestRef.current = requestAnimationFrame(renderCanvas);
+
+        const onFocusLoss = () => {
+            console.log("Pausing render loop due to focus loss");
+            cancelAnimationFrame(frameRequestRef.current);
+        }
+
+        const onFucusGain = () => {
+            console.log("Resuming render loop due to focus gain");
+            frameRequestRef.current = requestAnimationFrame(renderCanvas);
+        }
+
+        if(options?.pauseRenderOnFocusLoss ?? true) {
+            // Stop on unfocus
+            window.addEventListener('blur', onFocusLoss, false);
+
+            // Start again on focus
+            window.addEventListener('focus', onFucusGain, false);
+        }
+
+        return () => {
+            cancelAnimationFrame(frameRequestRef.current);
+            window.removeEventListener('blur', onFocusLoss);
+            window.removeEventListener('focus', onFucusGain);
+        };
+    }); // Make sure no dependencies are passed here! We want to run this effect every time, so the render loop has the latest state.
 
     const renderCanvas = () => {
+        frameRequestRef.current = requestAnimationFrame(renderCanvas);
+
         if (!canvas || !context)
             return;
 
-        console.log("rendering canvas");
 
         context.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -234,11 +312,9 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         const artworkWidth = artworkCanvas.width;
 
         /**
-         * Zoom basis means -> 1 = imageData height fits canvas height
+         * Zoom basis means -> imageData height fits canvas height
          */
         const zoomBasis = canvasHeight / artworkHeight;
-        console.log("zoomBasis", zoomBasis);
-        
 
         // draw background
         context.fillStyle = "#f0f0f0";
@@ -247,18 +323,18 @@ export function useCanvas(canvasRef: RefObject<HTMLCanvasElement>, options?: Can
         //draw artwork
         context.imageSmoothingEnabled = false;
         let canvasToDraw = artworkCanvas;
-        if(artworkPreviewCanvas) {
+        if (artworkPreviewCanvas !== null) {
             canvasToDraw = artworkPreviewCanvas;
-        } 
-        context.drawImage(canvasToDraw, panX , panY, artworkWidth * zoomBasis * zoom, artworkHeight * zoomBasis * zoom);
+        }
+
+        context.drawImage(canvasToDraw, panX, panY, artworkWidth * zoomBasis * zoom, artworkHeight * zoomBasis * zoom);
         context.imageSmoothingEnabled = true;
 
         // draw border arround artwork
         context.strokeStyle = "#ffffff";
         context.lineWidth = 2;
         context.strokeRect(panX, panY, artworkWidth * zoomBasis * zoom, artworkHeight * zoomBasis * zoom);
-
     }
 
-    return { zoom, setZoom, panX, setPanX, panY, setPanY, mouseDown, newArtwork, hasPreview: !!artworkPreviewCanvas, selectedTool, selectTool };
+    return { zoom, setZoom, panX, setPanX, panY, setPanY, mouseDown, middleMouseDown, newArtwork, hasPreview: !!artworkPreviewCanvas, selectedTool, selectTool };
 }

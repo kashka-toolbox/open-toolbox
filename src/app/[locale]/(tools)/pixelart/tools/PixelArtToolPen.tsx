@@ -8,8 +8,21 @@ export class PixelArtToolPen extends CanvasTool {
     onArtworkClick(x: number, y: number, mouseEvent: MouseEvent): void {
         throw new Error("Method not implemented.");
     }
+    
     onMouseMove(artworkX: number, artworkY: number, mouseEvent: MouseEvent): void {
-        console.log(artworkX, artworkY);
+        if (!this.prewviewContext || !this.previewCanvas || !this.previewToArtwork || !this.resetPreviewToArtwork) {
+            console.log("Tool not selected", {
+                prewviewContext: this.prewviewContext,
+                previewCanvas: this.previewCanvas,
+                previewToArtwork: this.previewToArtwork,
+                resetPreviewToArtwork: this.resetPreviewToArtwork,
+            });
+            return;
+        }
+
+        this.resetPreviewToArtwork();
         
+        this.prewviewContext.fillStyle = "black";
+        this.prewviewContext.fillRect(artworkX, artworkY, 1, 1);
     }
 }
