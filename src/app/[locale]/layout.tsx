@@ -37,9 +37,7 @@ export default async function LocaleLayout({
       <body className={cn("transition-colors", inter.className)}>
         <Providers locale={locale} messages={messages}>
           <Header />
-          <main className="container pb-2 pt-2 md:pt-8 md:pb-8 min-h-screen">
-            {children}
-          </main>
+          {children}
           <footer className="container border-t border-border pt-8 pb-8 flex flex-col">
             <h1 className="text-xs font-bold tracking-tight scroll-m-20 mb-4">All rights reserved. Morten Renner 2024 ©</h1>
             <Link href="/privacy" className="text-xs font-normal tracking-tight">Privacy Policy</Link>

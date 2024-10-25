@@ -18,7 +18,7 @@ export default function Layout({
   const pageTitle = getTitleByHref(pathname);
 
   return (
-    <main className="mx-auto max-w-screen-2xl p-8 pt-6">
+    <main className="container pb-2 pt-2 md:pt-8 md:pb-8 min-h-screen mx-auto max-w-screen-2xl p-8 pt-6">
       <section className="pb-4">
         <Alert variant={"destructive"}>
             <ExclamationTriangleIcon />
