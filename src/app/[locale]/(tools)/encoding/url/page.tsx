@@ -81,7 +81,7 @@ export default function URLEncoding() {
               Include <HoverCard>
                 <HoverCardTrigger className="underline">optional characters</HoverCardTrigger>
                 <HoverCardContent>
-                  <p>These characters are:<br/><code>~ ! ' ( ) *</code></p>
+                  <p>These characters are:<br/><code>~ ! &apos ( ) *</code></p>
                 </HoverCardContent>
               </HoverCard>
             </label>
