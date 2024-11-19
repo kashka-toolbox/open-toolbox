@@ -27,11 +27,11 @@ export default function URLEncoding() {
 
     return <div className="flex flex-col gap-4 lg:gap-8 pt-2">
         <Section variant={"primary"}>
-            <h1 className="header-section-1">{t("title")}</h1>
-            <span className="flex gap-2 flex-col">
+            <h1 className="header-section-1 mb-6">{t("title")}</h1>
+            <span className="flex flex-col md:flex-row gap-4 items-center">
                 <Input value={input} onChange={(e) => setInput(e.currentTarget.value)} placeholder="#448487" />
-                <span className="flex flex-row items-center gap-2">
-                    <Input value={output} className="max-w-48 transition-colors duration-500" readOnly style={{
+                <span className="flex flex-row items-center gap-2 w-full">
+                    <Input value={output} className="transition-colors duration-500" readOnly style={{
                         borderColor: input,
                     }} />
                     <CopyToClipboard clipboardContent={output} className="mt-[1px]" />
