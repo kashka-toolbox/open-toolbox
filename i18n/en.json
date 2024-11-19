@@ -20,6 +20,15 @@
           "description": "Lookup the URL encoding for a specific character."
         }
       }
+    },
+    "color": {
+      "hexToHsl": {
+        "title": "Hex to HSL",
+        "description": "Converts a hex color to HSL format.",
+        "options": {
+            "valuesOnly": "Include in hsl(...)"
+        }
+      }
     }
   },
   "translationTable": {
