@@ -40,7 +40,7 @@ next-env.d.ts
 /playwright/.cache/
 
 # pwa sw
-**/public/workbox-*.js
-**/public/sw.js
-**/public/swe-*.js
-**/public/fallback-*.js
+**/public/workbox-*.js*
+**/public/sw.js*
+**/public/swe-*.js*
+**/public/fallback-*.js*
