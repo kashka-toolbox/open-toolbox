@@ -6,9 +6,20 @@ import type { Metadata } from "next";
 import { getMessages } from "next-intl/server";
 import dynamic from 'next/dynamic';
 import { Inter } from "next/font/google";
+import localFont from '@next/font/local'
 const Providers = dynamic(() => import('@/components/providers'), { ssr: false })
 
 const inter = Inter({ subsets: ["latin"] });
+
+const hostGrotesk = localFont({
+  src: [
+    {
+      path: '../../../public/fonts/HostGrotesk/HostGrotesk-Italic-VariableFont_wght.ttf',
+      weight: '300 700',
+    },
+  ],
+  variable: '--font-HostGroteskItalic',
+})
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,7 +36,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className={hostGrotesk.variable}>
       <head>
         <link rel="icon" type="image/png" href="/favicon-48x48.png" sizes="48x48" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

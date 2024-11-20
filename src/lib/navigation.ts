@@ -41,15 +41,9 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
         {
           title: "Home Page",
           description: "The introduction page.",
-          href: "/docs",
+          href: "/",
           displayInMenu: false,
           shortcut: "*",
-        },
-        {
-          title: "Installation",
-          description: "How to install dependencies and structure your app.",
-          href: "/docs/installation",
-          displayInMenu: false,
         },
         {
           title: "Source Code",
