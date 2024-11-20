@@ -19,8 +19,8 @@ export default function Home() {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi dicta deleniti ad quasi, totam sunt unde labore inventore officiis sequi blanditiis optio soluta distinctio alias explicabo quibusdam qui sit nobis.
         </span>
       </section>
-      <section className="mx-auto flex max-w-[600px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
-        <CommandAndNavigationCommand />
+      <section className="mx-auto flex max-w-[600px] min-h-48 flex-col items-center gap-2 py-8 md:my-12 md:mb-8 lg:my-24 lg:mb-20 relative">
+        <CommandAndNavigationCommand className="absolute left-0 right-0 h-min" />
       </section>
 
       <Section variant="primary">
