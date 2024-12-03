@@ -30,6 +30,11 @@
     --input: 0, 0%, 76%;
     --ring: 44, 85%, 66%;
     --radius: 0.5rem;
+
+    --type-number: 183, 33%, 40%;
+    --type-number-foreground: 183, 33%, 10%;
+    --type-color: 40, 75%, 48%;
+    --type-color-foreground: 40, 75%, 48%;
   }
 
   .dark {

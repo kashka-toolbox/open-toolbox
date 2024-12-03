@@ -64,6 +64,14 @@ export default function Home() {
           <div className="bg-success text-success-foreground p-4 rounded-lg">Success</div>
         </div>
 
+        <h4 className="header-section-4">Colors for handles</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+          <div className="bg-type-number text-type-number-foreground p-4 rounded-lg">type-number</div>
+          <div className="bg-green text-green-foreground p-4 rounded-lg">Green</div>
+          <div className="bg-yellow text-yellow-foreground p-4 rounded-lg">Yellow</div>
+          <div className="bg-red text-red-foreground p-4 rounded-lg">Red</div>
+        </div>
+
         <h3 className="header-section-3">Without complementary foreground color</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
           <div className="bg-border text-foreground p-4 rounded-lg">border</div>

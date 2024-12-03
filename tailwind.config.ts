@@ -74,6 +74,10 @@ const config = {
           DEFAULT: "hsl(var(--success), <alpha-value>)",
           foreground: "hsl(var(--success-foreground), <alpha-value>)",
         },
+        'type-number': {
+          DEFAULT: "hsl(var(--type-number), <alpha-value>)",
+          foreground: "hsl(var(--type-number-foreground), <alpha-value>)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
