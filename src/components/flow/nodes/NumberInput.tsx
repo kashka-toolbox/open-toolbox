@@ -19,8 +19,8 @@ export function NumberInput({ id, data }: { id: string; data: { label: string, v
                 id={`number-${id}`}
                 name="number"
                 type="number"
-                min="0"
-                max="255"
+                min={data.min}
+                max={data.max}
                 onChange={onChange}
                 className="nodrag"
                 value={data.value}
