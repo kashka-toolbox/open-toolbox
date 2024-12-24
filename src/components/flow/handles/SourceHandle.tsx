@@ -24,7 +24,7 @@ export function SourceHandle({ id, label, typeDescription, className, dataType }
                 </HoverCardContent>
             </HoverCard>
 
-            <label htmlFor="red" className="label">
+            <label htmlFor="red" className="block text-right w-full">
                 {label}
             </label>
         </div>

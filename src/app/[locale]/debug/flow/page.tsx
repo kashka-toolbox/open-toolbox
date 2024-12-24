@@ -14,6 +14,9 @@ import { inputNodes, nodeTypes, outputNodes } from '@/lib/flow/FlowNodes';
 import { createFlow, FlowStore } from '@/lib/flow/createFlow';
 import { Label } from '@radix-ui/react-dropdown-menu';
 import '@xyflow/react/dist/style.css';
+import { createContext, useEffect, useState } from 'react';
+import { AppNode } from '@/lib/flow/flowTypes';
+import { log } from 'console';
 
 const initialNodes = [
     {
@@ -38,21 +41,33 @@ const initialNodes = [
         type: 'ColorInput',
         id: '4',
         data: { label: 'Color Input', value: "#000000" },
-        position: { x: 250, y: 0 },
+        position: { x: 500, y: 0 },
     },
     {
         type: 'ColorPreview',
         id: 'color',
-        position: { x: 250, y: 160 },
+        position: { x: 500, y: 160 },
         data: { label: 'Color' },
+    },
+    {
+        type: 'NumberDelay',
+        id: 'delay-1',
+        data: { label: 'Number Delay', delay: 1000 },
+        position: { x: 220, y: 0 },
     }
 ];
 const initialEdges = [
     {
-        id: '1-color',
-        source: '1',
+        id: 'delay-color-1',
+        source: 'delay-1',
         target: 'color',
         targetHandle: 'number-red',
+    },
+    {
+        id: 'input-delay-1',
+        source: '1',
+        target: 'delay-1',
+        targetHandle: 'number-value',
     },
     {
         id: '2-color',
@@ -69,18 +84,21 @@ const initialEdges = [
 ];
 
 const debugFlowStore = createFlow(initialNodes, initialEdges);
+export const FlowStoreContext = createContext<null | FlowStore>(null);
 
 export default function FlowPage() {
     return (
-        <ReactFlowProvider>
-            <FlowAsForm flowStore={debugFlowStore} />
-            <br />
-            <Card className='overflow-hidden'>
-                <CardContent className='p-0'>
-                    <Flow flowStore={debugFlowStore} />
-                </CardContent>
-            </Card>
-        </ReactFlowProvider>
+        <FlowStoreContext.Provider value={debugFlowStore}>
+            <ReactFlowProvider>
+                <FlowAsForm flowStore={debugFlowStore} />
+                <br />
+                <Card className='overflow-hidden'>
+                    <CardContent className='p-0'>
+                        <Flow flowStore={debugFlowStore} />
+                    </CardContent>
+                </Card>
+            </ReactFlowProvider>
+        </FlowStoreContext.Provider>
     );
 }
 
@@ -88,8 +106,19 @@ export default function FlowPage() {
 function FlowAsForm({ flowStore }: { flowStore: FlowStore }) {
     const flowState = flowStore();
 
-    const inputs = flowState.nodes.filter((node) => Object.keys(inputNodes).includes(node.type ?? ""));
-    const outputs = flowState.nodes.filter((node) => Object.keys(outputNodes).includes(node.type ?? ""));
+    const [inputs, setInputNodes] = useState<AppNode[]>([]);
+    const [outputs, setOutputNodes] = useState<AppNode[]>([]);
+
+    useEffect(() => {        
+        const unsubscribe = flowStore.subscribe((state) => {
+            setInputNodes(state.nodes.filter((node) => Object.keys(inputNodes).includes(node.type ?? "")));
+            setOutputNodes(state.nodes.filter((node) => Object.keys(outputNodes).includes(node.type ?? "")));
+        });
+
+        return () => {
+            unsubscribe();
+        };
+    }, [flowStore]);
 
     return <div>
         Input nodes
@@ -129,7 +158,7 @@ function Flow({ flowStore }: { flowStore: FlowStore }) {
         onEdgesChange={flowState.onEdgesChange}
         onConnect={flowState.onConnect}
         colorMode='dark'
-        className='min-h-96'
+        className='min-h-[36rem]'
         proOptions={{ hideAttribution: true }}>
         <Controls />
         <Background variant={BackgroundVariant.Dots} gap={24} size={1} />

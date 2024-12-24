@@ -12,6 +12,9 @@ export function createFlow(initialNodes: AppNode[], initialEdges: Edge[]): FlowS
     return create<FlowState>((set, get) => ({
         nodes: initialNodes,
         edges: initialEdges,
+        get processingNodes() {
+            return get().nodes.filter((node) => node.processingSince !== undefined);
+        },
         onNodesChange: (changes: NodeChange<Node>[]) => {
             set({
                 nodes: applyNodeChanges(changes, get().nodes),
@@ -44,6 +47,25 @@ export function createFlow(initialNodes: AppNode[], initialEdges: Edge[]): FlowS
                     return node;
                 }),
             });
+        },
+        setNodeProcessing(id, processing) {
+            set({
+                nodes: get().nodes.map((node) => {
+                    if (node.id !== id) {
+                        return node;
+                    }
+
+                    if(processing) {
+                        return { ...node, processingSince: Date.now() };
+                    } else {
+                        delete node.processingSince;
+                        return { ...node };
+                    }
+                }),
+            });
+        },
+        isNodeProcessing(id) {
+            return get().nodes.some((node) => node.id === id && node.processingSince !== undefined);
         },
     }));
 }
