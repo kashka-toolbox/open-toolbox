@@ -28,10 +28,12 @@ export function BaseNode({ id, label, children, options }:
 
     return ( // TODO add min/max input
         <div className={cn("bg-background text-foreground flex flex-col gap-2 p-3 border-1 rounded-md",
-            isProcessing ? "" : ""
+            isProcessing ? "border-primary border" : ""
         )}>
             <h4>{label}</h4>
-            <div className="text-sm text-muted-foreground">{options?.processingLabel ?? "Processing..."}</div>
+            {
+                isProcessing && <div className="text-sm text-muted-foreground">{options?.processingLabel ?? "Processing..."}</div>
+            }
             {children}
         </div>
     );
