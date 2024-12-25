@@ -1,0 +1,10 @@
+Dockerfile
+.dockerignore
+.env.development
+.git
+.github
+node_modules
+.next
+*.md
+design
+
