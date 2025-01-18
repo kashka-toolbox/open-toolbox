@@ -1,6 +1,6 @@
 'use client';
 
-import { AppNode, FlowState } from "@/lib/flow/flowTypes";
+import { AppNode, FlowState } from "@/lib/flow/FlowTypes";
 import { addEdge, applyEdgeChanges, applyNodeChanges, Edge, EdgeChange, Node, NodeChange } from "@xyflow/react";
 import { create, StoreApi, UseBoundStore } from "zustand";
 

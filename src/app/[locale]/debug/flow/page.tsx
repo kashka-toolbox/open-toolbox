@@ -15,8 +15,7 @@ import { createFlow, FlowStore } from '@/lib/flow/createFlow';
 import { Label } from '@radix-ui/react-dropdown-menu';
 import '@xyflow/react/dist/style.css';
 import { createContext, useEffect, useState } from 'react';
-import { AppNode } from '@/lib/flow/flowTypes';
-import { log } from 'console';
+import { AppNode } from '@/lib/flow/FlowTypes';
 
 const initialNodes = [
     {
