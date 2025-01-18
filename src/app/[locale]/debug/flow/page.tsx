@@ -7,15 +7,16 @@ import {
     ReactFlow,
     ReactFlowProvider,
 } from '@xyflow/react';
+import { useShallow } from 'zustand/react/shallow';
 
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { inputNodes, nodeTypes, outputNodes } from '@/lib/flow/FlowNodes';
+import { AppNode } from '@/lib/flow/FlowTypes';
 import { createFlow, FlowStore } from '@/lib/flow/createFlow';
 import { Label } from '@radix-ui/react-dropdown-menu';
 import '@xyflow/react/dist/style.css';
 import { createContext, useEffect, useState } from 'react';
-import { AppNode } from '@/lib/flow/FlowTypes';
 
 const initialNodes = [
     {
@@ -86,9 +87,20 @@ const debugFlowStore = createFlow(initialNodes, initialEdges);
 export const FlowStoreContext = createContext<null | FlowStore>(null);
 
 export default function FlowPage() {
+    const [isAsync] = debugFlowStore(useShallow((state) => [state.isAsync]));
+
     return (
         <FlowStoreContext.Provider value={debugFlowStore}>
             <ReactFlowProvider>
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Flow</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <p>isAsync: {isAsync ? 'true' : 'false'}</p>
+                    </CardContent>
+                </Card>
+                <br />
                 <FlowAsForm flowStore={debugFlowStore} />
                 <br />
                 <Card className='overflow-hidden'>
@@ -108,7 +120,7 @@ function FlowAsForm({ flowStore }: { flowStore: FlowStore }) {
     const [inputs, setInputNodes] = useState<AppNode[]>([]);
     const [outputs, setOutputNodes] = useState<AppNode[]>([]);
 
-    useEffect(() => {        
+    useEffect(() => {
         const unsubscribe = flowStore.subscribe((state) => {
             setInputNodes(state.nodes.filter((node) => Object.keys(inputNodes).includes(node.type ?? "")));
             setOutputNodes(state.nodes.filter((node) => Object.keys(outputNodes).includes(node.type ?? "")));

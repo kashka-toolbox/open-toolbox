@@ -8,6 +8,7 @@ export type AppNode = Node & {
 export type FlowState = {
     nodes: AppNode[];
     edges: Edge[];
+    readonly isAsync: boolean;
     readonly processingNodes: readonly AppNode[];
     onNodesChange: OnNodesChange<AppNode>;
     onEdgesChange: OnEdgesChange;

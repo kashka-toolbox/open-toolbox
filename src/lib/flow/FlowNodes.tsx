@@ -25,7 +25,9 @@ export const nodeTypes = {
     ...outputNodes
 };
 
-export const nodeTypeMetaData: Record<keyof typeof nodeTypes, NodeTypeMetaData> = {
+export type NodeTypes = keyof typeof nodeTypes;
+
+export const nodeTypeMetaData: Record<NodeTypes, NodeTypeMetaData> = {
     NumberInput: {
         label: 'Number Input',
         icon: <EnterIcon />,
