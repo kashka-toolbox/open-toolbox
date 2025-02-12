@@ -97,7 +97,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.FULL_IMAGE_NAME }}
-	  tags: |
+          tags: |
             type=ref,event=branch
             type=ref,event=pr
             type=semver,pattern={{version}}
