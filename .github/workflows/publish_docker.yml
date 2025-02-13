@@ -36,6 +36,9 @@ jobs:
           - linux/arm64
     env:
       IMAGE_NAME: ${{ needs.prepare.outputs.image-name }}
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Prepare
         run: |
