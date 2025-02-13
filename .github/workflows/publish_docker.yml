@@ -97,6 +97,9 @@ jobs:
       - build
     env:
       IMAGE_NAME: ${{ needs.prepare.outputs.image-name }}
+    permissions:
+      contents: none
+      packages: write
     steps:
       - name: Download digests
         uses: actions/download-artifact@v4
