@@ -7,11 +7,12 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  UPPER_IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
   prepare:
     runs-on: ubuntu-latest
+    env:
+      UPPER_IMAGE_NAME: ${{ env.REGISTRY }}/${{ github.repository }}
     outputs:
       image-name: ${{ steps.step1.outputs.IMAGE_NAME }}
     steps:
@@ -97,6 +98,7 @@ jobs:
       - build
     env:
       IMAGE_NAME: ${{ needs.prepare.outputs.image-name }}
+      BUILDX_NO_DEFAULT_ATTESTATIONS: 1
     permissions:
       contents: none
       packages: write
