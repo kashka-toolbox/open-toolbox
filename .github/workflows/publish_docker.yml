@@ -7,9 +7,15 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ghcr.io/${{ github.repository }}
+  UPPER_IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Convert image name
+        run: echo "IMAGE_NAME=$(echo $UPPER_IMAGE_NAME | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
   build:
     runs-on: ubuntu-latest
     strategy:
