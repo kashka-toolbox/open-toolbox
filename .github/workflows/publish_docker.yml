@@ -14,7 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Convert image name
-        run: echo "IMAGE_NAME=$(echo $UPPER_IMAGE_NAME | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+        run: |
+          echo "Current image name:"
+          echo $UPPER_IMAGE_NAME
+          echo "IMAGE_NAME=$(echo $UPPER_IMAGE_NAME | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo "Converted image name:"
+          echo $(echo $UPPER_IMAGE_NAME | tr '[:upper:]' '[:lower:]')
 
   build:
     runs-on: ubuntu-latest
