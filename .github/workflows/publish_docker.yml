@@ -125,10 +125,18 @@ jobs:
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
+            # for example: develop
             type=ref,event=branch
+            # for example: pr-35
             type=ref,event=pr
+            # for example: 2.3.4
             type=semver,pattern={{version}}
+            # for example: 2.3
             type=semver,pattern={{major}}.{{minor}}
+            # for example: 2
+            type=semver,pattern={{major}}
+            # set 'latest' for new tags
+            type=raw,value=latest,enable=${{ github.ref == refs/tags/* }}
 
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests
