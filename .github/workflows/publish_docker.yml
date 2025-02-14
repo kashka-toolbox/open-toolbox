@@ -7,12 +7,11 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  UPPER_IMAGE_NAME: ghcr.io/${{ github.repository }}
 
 jobs:
   prepare:
     runs-on: ubuntu-latest
-    env:
-      UPPER_IMAGE_NAME: ${{ env.REGISTRY }}/${{ github.repository }}
     outputs:
       image-name: ${{ steps.step1.outputs.IMAGE_NAME }}
     steps:
