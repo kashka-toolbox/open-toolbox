@@ -1,4 +1,4 @@
-import { ExclamationTriangleIcon, GitHubLogoIcon, TextIcon } from "@radix-ui/react-icons";
+import { BlendingModeIcon, ExclamationTriangleIcon, GitHubLogoIcon, TextIcon } from "@radix-ui/react-icons";
 
 interface Displayable {
   title: string;
@@ -27,12 +27,12 @@ interface OpenInNewTab {
 
 export const menuData: Array<Displayable & DisplayInMenuField & {
   items: Array<
-  DisplayInMenuField
-  & Displayable
-  & Partial<Navigable>
-  & Partial<Icon>
-  & Partial<CommandShortcut>
-  & Partial<OpenInNewTab>>;
+    DisplayInMenuField
+    & Displayable
+    & Partial<Navigable>
+    & Partial<Icon>
+    & Partial<CommandShortcut>
+    & Partial<OpenInNewTab>>;
 }> = [
     {
       title: "Getting started",
@@ -41,15 +41,9 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
         {
           title: "Home Page",
           description: "The introduction page.",
-          href: "/docs",
+          href: "/",
           displayInMenu: false,
           shortcut: "*",
-        },
-        {
-          title: "Installation",
-          description: "How to install dependencies and structure your app.",
-          href: "/docs/installation",
-          displayInMenu: false,
         },
         {
           title: "Source Code",
@@ -106,10 +100,24 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
           displayInMenu: true,
         },
       ],
+    },
+    {
+      title: "Color",
+      displayInMenu: true,
+      description: "Color tools.",
+      items: [
+        {
+          title: "Hex to HSL",
+          description: "Convert HEX colors to HSL.",
+          href: "/color/hex-to-hsl",
+          displayInMenu: true,
+          icon: BlendingModeIcon,
+        },
+      ],
     }
   ];
 
-export function getTitleByHref (href: string): string | undefined {
+export function getTitleByHref(href: string): string | undefined {
   href = trimLocale(href);
   console.log(href);
 
@@ -118,7 +126,7 @@ export function getTitleByHref (href: string): string | undefined {
     .find(item => item.href === href)?.title;
 }
 
-export function trimLocale (href: string): string {
+export function trimLocale(href: string): string {
   //example: /de/tools/word-counter -->  /tools/word-counter
   return href.replace(/\/[a-z]{2}/, '');
 }

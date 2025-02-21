@@ -1,5 +1,16 @@
 {
   "home": {
     "title": "Die ultimative Werkzeugkiste"
+  },
+  "tools": {
+    "color": {
+      "hexToHsl": {
+        "title": "Hex zu HSL",
+        "description": "Konvertiert eine Hex-Farbe zum HSL Format.",
+        "options": {
+          "valuesOnly": "In hsl(...) einschließen"
+        }
+      }
+    }
   }
 }

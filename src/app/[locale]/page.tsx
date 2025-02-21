@@ -2,6 +2,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CommandAndNavigationCommand } from "@/components/ui/CommandAndNavigationCommand";
+import { FourDotsIcon } from "@/components/ui/Icons/FourDotsIcon";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Section } from "@/components/ui/Section";
@@ -12,15 +13,15 @@ export default function Home() {
   const t = useTranslations('home');
 
   return (
-    <>
+    <div className="container pl-1 pr-1 md:pl-4 md:pr-4">
       <section className="mx-auto flex max-w-[980px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
         <h1 className="text-center text-3xl font-bold leading-tight tracking-tighter md:text-6xl lg:leading-[1.1]">{t('title')}</h1>
         <span className="max-w-[750px] text-center text-lg text-muted-foreground sm:text-xl">
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi dicta deleniti ad quasi, totam sunt unde labore inventore officiis sequi blanditiis optio soluta distinctio alias explicabo quibusdam qui sit nobis.
         </span>
       </section>
-      <section className="mx-auto flex max-w-[600px] flex-col items-center gap-2 py-8 md:py-12 md:pb-8 lg:py-24 lg:pb-20">
-        <CommandAndNavigationCommand />
+      <section className="mx-auto flex max-w-[600px] min-h-48 flex-col items-center gap-2 py-8 md:my-12 md:mb-8 lg:my-24 lg:mb-20 relative">
+        <CommandAndNavigationCommand className="absolute left-0 right-0 h-min" />
       </section>
 
       <Section variant="primary">
@@ -43,6 +44,34 @@ export default function Home() {
           <Button variant={"link"} disabled>disabled</Button>
           <Button variant={"outline"}>outline</Button>
           <Button variant={"outline"} disabled>disabled</Button>
+        </div>
+      </Section>
+
+      <Section variant="ghost" className="mt-8">
+        <h1 className="header-section-1">Colors</h1>
+        All colors are defined in the theme file.
+
+        <h3 className="header-section-3">With complementary foreground color</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+          <div className="bg-primary text-primary-foreground p-4 rounded-lg">Primary</div>
+          <div className="bg-secondary text-secondary-foreground p-4 rounded-lg">Secondary</div>
+          <div className="bg-destructive text-destructive-foreground p-4 rounded-lg">Destructive</div>
+          <div className="bg-muted text-muted-foreground p-4 rounded-lg">Muted</div>
+          <div className="bg-accent text-accent-foreground p-4 rounded-lg">Accent</div>
+          <div className="bg-popover text-popover-foreground p-4 rounded-lg">Popover</div>
+          <div className="bg-code text-code-foreground p-4 rounded-lg">Code</div>
+          <div className="bg-card text-card-foreground p-4 rounded-lg">Card</div>
+          <div className="bg-success text-success-foreground p-4 rounded-lg">Success</div>
+        </div>
+
+        <h3 className="header-section-3">Without complementary foreground color</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+          <div className="bg-border text-foreground p-4 rounded-lg">border</div>
+          <div className="bg-input text-background p-4 rounded-lg">input</div>
+          <div className="bg-ring text-background p-4 rounded-lg">ring</div>
+          <div className="bg-background text-foreground p-4 rounded-lg">background</div>
+          <div className="bg-foreground text-background p-4 rounded-lg">foreground</div>
+          <div className="bg-border text-foreground p-4 rounded-lg">border</div>
         </div>
       </Section>
 
@@ -102,6 +131,6 @@ export default function Home() {
           </AlertDescription>
         </Alert>
       </Section>
-    </>
+    </div>
   );
 }
