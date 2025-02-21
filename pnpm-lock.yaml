@@ -99,8 +99,6 @@ importers:
       '@types/react-dom':
         specifier: ^18.3.5
         version: 18.3.5(@types/react@18.3.18)
-        specifier: ^18.2.22
-        version: 18.2.22
       '@types/react-transition-group':
         specifier: ^4.4.11
         version: 4.4.11
