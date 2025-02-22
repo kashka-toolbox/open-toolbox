@@ -74,3 +74,4 @@ export const CommandAndNavigationCommand = React.forwardRef<
     </Command>
   );
 });
+CommandAndNavigationCommand.displayName = "CommandAndNavigationCommand";
