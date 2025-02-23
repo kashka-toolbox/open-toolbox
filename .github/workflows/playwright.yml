@@ -1,13 +1,14 @@
 name: Playwright Tests
 on:
   push:
-    branches: [master, production]
+    branches: [development, production]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 env:
-  CI: Test
+  CI: Playwright
+  PORT: 3000
 
 jobs:
   test:
@@ -50,8 +51,8 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ hashFiles('**/playwright.config.ts') }}-
 
-      - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
+#      - name: Install Playwright Browsers
+#        run: pnpm exec playwright install --with-deps
 
       - name: Setup build cache
         uses: actions/cache@v4
@@ -59,15 +60,18 @@ jobs:
           path: |
             ~/.npm
             ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
           restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/pnpm-lock.yaml') }}-
 
       - name: Build
         run: pnpm run build
+      
+      - name: Copy Static Files
+        run: cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
 
-      - name: Run Playwright tests
-        run: pnpm run playwright-ci
+      - name: Run Playwright Tests
+        run: pnpm execute playwright test
 
       - uses: actions/upload-artifact@v4
         if: always()
