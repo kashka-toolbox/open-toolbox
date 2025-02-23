@@ -51,8 +51,8 @@ jobs:
             ~/.cache/ms-playwright
           key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}-${{ hashFiles('**/playwright.config.ts') }}-
 
-#      - name: Install Playwright Browsers
-#        run: pnpm exec playwright install --with-deps
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
 
       - name: Setup build cache
         uses: actions/cache@v4
@@ -71,7 +71,7 @@ jobs:
         run: cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/
 
       - name: Run Playwright Tests
-        run: pnpm execute playwright test
+        run: pnpm exec playwright test
 
       - uses: actions/upload-artifact@v4
         if: always()
