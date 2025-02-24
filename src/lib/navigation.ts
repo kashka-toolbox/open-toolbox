@@ -1,9 +1,15 @@
 import { BlendingModeIcon, ExclamationTriangleIcon, GitHubLogoIcon, TextIcon } from "@radix-ui/react-icons";
 
-interface Displayable {
-  title: string;
-  description?: string;
+interface NavigationGroupTranslationKey {
+  translationKey: string;
 }
+
+/**
+ * Relative to the NavigationGroupTranslationKey
+ */
+type NavigationItemTranslationKey = {
+  translationKey: string
+};
 
 interface DisplayInMenuField {
   displayInMenu: boolean;
@@ -25,29 +31,28 @@ interface OpenInNewTab {
   openInNewTab: boolean;
 }
 
-export const menuData: Array<Displayable & DisplayInMenuField & {
+
+export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField & {
   items: Array<
     DisplayInMenuField
-    & Displayable
+    & NavigationItemTranslationKey
     & Partial<Navigable>
     & Partial<Icon>
     & Partial<CommandShortcut>
     & Partial<OpenInNewTab>>;
 }> = [
     {
-      title: "Getting started",
-      displayInMenu: false,
+      translationKey: "gettingStarted",
+      displayInMenu: true,
       items: [
         {
-          title: "Home Page",
-          description: "The introduction page.",
+          translationKey: "home",
           href: "/",
           displayInMenu: false,
           shortcut: "*",
         },
         {
-          title: "Source Code",
-          description: "See the source code on GitHub.",
+          translationKey: "source",
           href: "https://github.com/Morten-Renner/mortens-toolbox",
           displayInMenu: false,
           icon: GitHubLogoIcon,
@@ -56,19 +61,28 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
       ],
     },
     {
-      title: "Debug",
+      translationKey: "legal",
+      displayInMenu: false,
+      items: [
+        {
+          translationKey: "privacy",
+          href: "/privacy",
+          displayInMenu: false,
+        }
+      ]
+    },
+    {
+      translationKey: "debug",
       displayInMenu: process.env.NEXT_PUBLIC_DISPLAY_DEBUG === "true",
       items: [
         {
-          title: "Debug",
-          description: "Debugging tools.",
+          translationKey: "debug",
           href: "/debug",
           displayInMenu: false,
           icon: ExclamationTriangleIcon,
         },
         {
-          title: "Auth",
-          description: "Debugging Authentication tools.",
+          translationKey: "auth",
           href: "/debug/auth",
           displayInMenu: process.env.NEXT_PUBLIC_DISPLAY_DEBUG === "true",
           icon: ExclamationTriangleIcon,
@@ -76,12 +90,11 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
       ],
     },
     {
-      title: "Text",
+      translationKey: "tools.text",
       displayInMenu: true,
       items: [
         {
-          title: "Word Counter",
-          description: "Count the number of words in a given text.",
+          translationKey: "wordCounter",
           href: "/word-counter",
           displayInMenu: true,
           icon: TextIcon,
@@ -89,26 +102,22 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
       ],
     },
     {
-      title: "Encoding",
+      translationKey: "tools.encoding",
       displayInMenu: true,
-      description: "Encode and decode different types of data.",
       items: [
         {
-          title: "URL",
-          description: "En/Decode URLs.",
+          translationKey: "URL",
           href: "/encoding/url",
           displayInMenu: true,
         },
       ],
     },
     {
-      title: "Color",
+      translationKey: "tools.color",
       displayInMenu: true,
-      description: "Color tools.",
       items: [
         {
-          title: "Hex to HSL",
-          description: "Convert HEX colors to HSL.",
+          translationKey: "hexToHSL",
           href: "/color/hex-to-hsl",
           displayInMenu: true,
           icon: BlendingModeIcon,
@@ -117,13 +126,22 @@ export const menuData: Array<Displayable & DisplayInMenuField & {
     }
   ];
 
-export function getTitleByHref(href: string): string | undefined {
+export function getTranslationKeyByHref(href: string): string | undefined {
   href = trimLocale(href);
   console.log(href);
 
   return menuData
     .flatMap(category => category.items)
-    .find(item => item.href === href)?.title;
+    .find(item => item.href === href)?.translationKey;
+}
+
+export function getGroupTranslationKeyByHref(href: string): string | undefined {
+  href = trimLocale(href);
+  console.log(href);
+
+  return menuData.find((p) => {
+    return p.items.findIndex(item => item.href === href) != -1
+  })?.translationKey;
 }
 
 export function trimLocale(href: string): string {

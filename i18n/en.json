@@ -2,6 +2,64 @@
   "home": {
     "title": "The Ultimate Toolbox"
   },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Search a tool here...",
+      "noResultsFound": "No results found."
+    },
+    "gettingStarted": {
+      "title": "Getting Started",
+      "home": {
+        "title": "Home",
+        "description": ""
+      },
+      "source": {
+        "title": "View source code",
+        "description": "Star us on GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Debug",
+      "auth": {
+        "title": "Auth",
+        "description": ""
+      },
+      "debug": {
+        "title": "Debug Overview",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": {
+        "title": "Privacy Statement",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Text",
+        "wordCounter": {
+          "title": "Word Counter",
+          "description": "Count sentences, words and characters"
+        }
+      },
+      "encoding": {
+        "title": "Encoding",
+        "URL": {
+          "title": "URL Encoding",
+          "description": "Encode text as a URL parameter"
+        }
+      },
+      "color": {
+        "title": "Color",
+        "hexToHSL": {
+          "title": "Hex to HSL",
+          "description": "Convert a hex color to HSL format"
+        }
+      }
+    }
+  },
   "tools": {
     "encoding": {
       "url": {
