@@ -18,25 +18,8 @@ import { ConverterCheckbox } from "@/components/ui/tools/converter/converter-che
 export default function URLEncoding() {
   const t = useTranslations("tools.encoding.url");
 
-  const [mode, setMode] = useState<"encode" | "decode">("encode");
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
   const [includeOptionalCharacters, setIncludeOptionalCharacters] = useState(false);
   const [encodeSpaceAsPlus, setEncodeSpaceAsPlus] = useState(false);
-
-  const handleModeChange = () => {
-    setInput(output);
-    setMode((prev) => prev === "encode" ? "decode" : "encode");
-  }
-
-  useEffect(() => {
-    try {
-      setOutput(convertURL(mode, input, includeOptionalCharacters, encodeSpaceAsPlus))
-    } catch (error: any) {
-      setOutput("Error: " + error.message); // TODO: Error handling
-    }
-
-  }, [mode, input, includeOptionalCharacters, encodeSpaceAsPlus]);
 
   return <div className="flex flex-col gap-4 lg:gap-8 pt-2">
     <ConverterBidirectional
