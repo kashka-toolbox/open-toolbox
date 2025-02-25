@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
       <section className="flex flex-col gap-4">
-          <KashkaMarkdown children={markdown} />
+          <KashkaMarkdown>{markdown}</KashkaMarkdown>
       </section>
   );
 }
