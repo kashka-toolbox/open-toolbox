@@ -12,7 +12,8 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { convertURL } from "./convertURL";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { ConverterBidirectional } from "@/components/ui/converter-bidirectional";
+import { ConverterBidirectional } from "@/components/ui/tools/converter/converter-bidirectional";
+import { ConverterCheckbox } from "@/components/ui/tools/converter/converter-checkbox";
 
 export default function URLEncoding() {
   const t = useTranslations("tools.encoding.url");
@@ -43,36 +44,25 @@ export default function URLEncoding() {
       b2a={(input: string) => convertURL("decode", input, includeOptionalCharacters, encodeSpaceAsPlus)}
       translationKey="tools.encoding.url"
       dependencies={[includeOptionalCharacters, encodeSpaceAsPlus]}>
-      <div className="flex items-center space-x-2">
-        <Checkbox
-          id="includeOptionalCharacters"
-          checked={includeOptionalCharacters}
-          onCheckedChange={(value) => setIncludeOptionalCharacters(value === true)} />
-        <label
-          htmlFor="includeOptionalCharacters"
-          className="peer-disabled:cursor-not-allowed hover:cursor-pointer"
-        >
-          Include <HoverCard>
-            <HoverCardTrigger className="underline">optional characters</HoverCardTrigger>
-            <HoverCardContent>
-              <p>These characters are:<br /><code>~ ! ‘ ( ) *</code></p>
-            </HoverCardContent>
-          </HoverCard>
-        </label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <Checkbox
-          id="encodeSpaceAsPlus"
-          checked={encodeSpaceAsPlus}
-          onCheckedChange={(value) => setEncodeSpaceAsPlus(value === true)} />
-        <label
-          htmlFor="encodeSpaceAsPlus"
-          className="peer-disabled:cursor-not-allowed hover:cursor-pointer"
-        >
-          Encode space as +
-        </label>
-      </div>
+      <ConverterCheckbox
+        id="includeOptionalCharacters"
+        checked={includeOptionalCharacters}
+        onCheckedChange={(value) => setIncludeOptionalCharacters(value === true)}>
+        Include <HoverCard>
+          <HoverCardTrigger className="underline">optional characters</HoverCardTrigger>
+          <HoverCardContent>
+            <p>These characters are:<br /><code>~ ! ‘ ( ) *</code></p>
+          </HoverCardContent>
+        </HoverCard>
+      </ConverterCheckbox>
+      <ConverterCheckbox
+        id="encodeSpaceAsPlus"
+        checked={encodeSpaceAsPlus}
+        onCheckedChange={(value) => setEncodeSpaceAsPlus(value === true)}>
+        Encode space as +
+      </ConverterCheckbox>
     </ConverterBidirectional>
+
     <Section variant={"ghost"}>
       <h2 className="header-section-2">{t("whatis")}</h2>
       <p>

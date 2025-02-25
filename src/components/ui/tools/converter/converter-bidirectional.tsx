@@ -1,10 +1,10 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { Section } from "./Section";
-import { Label } from "./label";
-import { Textarea } from "./textarea";
+import { Section } from "../../Section";
+import { Label } from "../../label";
+import { Textarea } from "../../textarea";
 import { Separator } from "@radix-ui/react-separator";
-import { Button } from "./button";
+import { Button } from "../../button";
 import { UpdateIcon } from "@radix-ui/react-icons";
 
 /**
