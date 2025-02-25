@@ -5,11 +5,8 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { getMessages } from "next-intl/server";
 import dynamic from 'next/dynamic';
-import { Inter } from "next/font/google";
-import localFont from '@next/font/local'
+import localFont from 'next/font/local'
 const Providers = dynamic(() => import('@/components/providers'), { ssr: false })
-
-const inter = Inter({ subsets: ["latin"] });
 
 const hostGrotesk = localFont({
   src: [
@@ -45,7 +42,7 @@ export default async function LocaleLayout({
         <link rel="manifest" href="/manifest.webmanifest" />
       </head>
 
-      <body className={cn("transition-colors", inter.className)}>
+      <body className={cn("transition-colors")}>
         <Providers locale={locale} messages={messages}>
           <Header />
           {children}
