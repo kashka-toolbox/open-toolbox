@@ -68,6 +68,11 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
           translationKey: "privacy",
           href: "/privacy",
           displayInMenu: false,
+        },
+        {
+          translationKey: "imprint",
+          href: "/imprint",
+          displayInMenu: false,
         }
       ]
     },
@@ -128,7 +133,6 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
 
 export function getTranslationKeyByHref(href: string): string | undefined {
   href = trimLocale(href);
-  console.log(href);
 
   return menuData
     .flatMap(category => category.items)
@@ -137,7 +141,6 @@ export function getTranslationKeyByHref(href: string): string | undefined {
 
 export function getGroupTranslationKeyByHref(href: string): string | undefined {
   href = trimLocale(href);
-  console.log(href);
 
   return menuData.find((p) => {
     return p.items.findIndex(item => item.href === href) != -1
