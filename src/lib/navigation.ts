@@ -115,6 +115,11 @@ export const menuData: Array<NavigationGroupTranslationKey & DisplayInMenuField 
           href: "/encoding/url",
           displayInMenu: true,
         },
+        {
+          translationKey: "base64",
+          href: "/encoding/base64",
+          displayInMenu: true,
+        },
       ],
     },
     {

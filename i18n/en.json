@@ -53,6 +53,10 @@
         "URL": {
           "title": "URL Encoding",
           "description": "Encode text as a URL parameter"
+        },
+        "base64": {
+          "title": "Base64 En-/Decoding",
+          "description": "Encode or decode text as Base64"
         }
       },
       "color": {
@@ -81,6 +85,12 @@
           "title": "Lookup Table",
           "description": "Lookup the URL encoding for a specific character."
         }
+      },
+      "base64": {
+        "a2b_result": "Encoded as Base64:",
+        "b2a_result": "Decoded as a string:",
+        "a2b_title": "Base64 Encoding",
+        "b2a_title": "Base64 Decoding"
       }
     },
     "color": {
