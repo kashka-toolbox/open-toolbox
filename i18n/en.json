@@ -2,13 +2,79 @@
   "home": {
     "title": "The Ultimate Toolbox"
   },
+  "navigation": {
+    "searchbar": {
+      "placeholder": "Search a tool here...",
+      "noResultsFound": "No results found."
+    },
+    "gettingStarted": {
+      "title": "Getting Started",
+      "home": {
+        "title": "Home",
+        "description": ""
+      },
+      "source": {
+        "title": "View source code",
+        "description": "Star us on GitHub!"
+      }
+    },
+    "debug": {
+      "title": "Debug",
+      "auth": {
+        "title": "Auth",
+        "description": ""
+      },
+      "debug": {
+        "title": "Debug Overview",
+        "description": ""
+      }
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": {
+        "title": "Privacy Statement",
+        "description": ""
+      },
+      "imprint": {
+        "title": "Imprint",
+        "description": ""
+      }
+    },
+    "tools": {
+      "text": {
+        "title": "Text",
+        "wordCounter": {
+          "title": "Word Counter",
+          "description": "Count sentences, words and characters"
+        }
+      },
+      "encoding": {
+        "title": "Encoding",
+        "URL": {
+          "title": "URL Encoding",
+          "description": "Encode text as a URL parameter"
+        },
+        "base64": {
+          "title": "Base64 En-/Decoding",
+          "description": "Encode or decode text as Base64"
+        }
+      },
+      "color": {
+        "title": "Color",
+        "hexToHSL": {
+          "title": "Hex to HSL",
+          "description": "Convert a hex color to HSL format"
+        }
+      }
+    }
+  },
   "tools": {
     "encoding": {
       "url": {
-        "encoded": "Encoded",
-        "decoded": "Decoded",
-        "title-url-encoding": "URL Encoding",
-        "title-url-decoding": "URL Decoding",
+        "a2b_result": "Encoded:",
+        "b2a_result": "Decoded:",
+        "a2b_title": "URL Encoding",
+        "b2a_title": "URL Decoding",
         "whatis": "What is URL Encoding?",
         "description": "URL Encoding (also known as Percent-Encoding) is a method of encoding characters in URLs that are not part of the standard ASCII character set. This includes special characters such as spaces, arrows or special characters from other languages.",
         "howItWorks": {
@@ -19,6 +85,12 @@
           "title": "Lookup Table",
           "description": "Lookup the URL encoding for a specific character."
         }
+      },
+      "base64": {
+        "a2b_result": "Encoded as Base64:",
+        "b2a_result": "Decoded as a string:",
+        "a2b_title": "Base64 Encoding",
+        "b2a_title": "Base64 Decoding"
       }
     },
     "color": {
@@ -33,5 +105,10 @@
   },
   "translationTable": {
     "search": "Search"
+  },
+  "converterBidirectional": {
+    "input": "Input:",
+    "swapSides": "Swap sides",
+    "clearInput": "Clear input"
   }
 }
