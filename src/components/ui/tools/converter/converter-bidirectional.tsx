@@ -44,7 +44,8 @@ export const ConverterBidirectional: React.FC<ConverterBidirectionalProps> = ({
     } catch (error: any) {
       setOutput("Error: " + error.message); // TODO: Error handling
     }
-  }, [mode, input].concat(dependencies));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, input, a2b, b2a].concat(dependencies));
 
   return (<Section variant={"primary"}>
     <h1 className="header-section-1 mb-6">{mode === "a2b" ? t_parent("a2b_title") : t_parent("b2a_title")}</h1>
