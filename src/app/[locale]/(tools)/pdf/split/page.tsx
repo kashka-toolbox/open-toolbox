@@ -32,12 +32,8 @@ export default function PDFSampleGenerator() {
       const copiedPages = await splittedPdfDoc.copyPages(pdfDoc, [i]);
       splittedPdfDoc.addPage(copiedPages[0]);
 
-      console.log("copy page", i, page, copiedPages);
-
       return splittedPdfDoc;
     }));
-
-    console.log(splittedPDFs);
 
     const zipFileWriter = new BlobWriter();
 
@@ -51,9 +47,6 @@ export default function PDFSampleGenerator() {
     }
 
     await zipWriter.close();
-
-    // Retrieves the Blob object containing the zip content into `zipFileBlob`. It
-    // is also returned by zipWriter.close() for more convenience.
     const zipFileBlob = await zipFileWriter.getData();
 
     saveBlobToFileWithDialog(zipFileBlob, "splitted.zip", [{ description: 'ZIP Archive', accept: { 'application/zip': ['.zip'] } }]);

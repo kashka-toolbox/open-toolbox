@@ -64,7 +64,7 @@ export default function PDFSampleGenerator() {
         id="pages"
         type="number"
         min={1}
-        max={100}
+        max={10000}
         value={pageCount}
         onChange={(event) => { setPageCount(parseInt(event.target.value)) }} />
     </span>
