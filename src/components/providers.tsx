@@ -19,10 +19,7 @@ export default function Providers({ children, locale, messages }: { children: Re
   return (
     <NextIntlClientProvider
       locale={locale}
-      messages={messages}
-      defaultTranslationValues={{
-        li: (chunks) => <li>{chunks}</li>
-      }}>
+      messages={messages}>
       <ThemeProvider
         attribute="class"
         defaultTheme="system"
