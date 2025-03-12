@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import { getMessages } from "next-intl/server";
 import dynamic from 'next/dynamic';
 import localFont from 'next/font/local'
-const Providers = dynamic(() => import('@/components/providers'), { ssr: false })
+const Providers = dynamic(() => import('@/components/providers'))
 
 const hostGrotesk = localFont({
   src: [
