@@ -1,7 +1,7 @@
 import { CommandAndNavigationCommand } from "@/components/ui/CommandAndNavigationCommand";
 import { Section } from "@/components/ui/Section";
-import { Link } from "@/navigation";
-import { BoxIcon, GitHubLogoIcon, LaptopIcon } from "@radix-ui/react-icons";
+import { Link } from "@/i18n/navigation";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { useTranslations } from 'next-intl';
 
 import { ReactNode } from 'react';
