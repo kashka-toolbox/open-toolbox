@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:full": "next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
     "start": "next start -p 3000",
     "lint": "next lint",
     "playwright-ui": "pnpm exec playwright test --ui",
